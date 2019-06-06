@@ -1,5 +1,7 @@
 {
   "name": "wololoStats",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
