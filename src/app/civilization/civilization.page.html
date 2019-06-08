@@ -1,0 +1,16 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>civilization</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-button color="primary" [routerLink]="['/home']">Primary</ion-button>
+	<ion-list>
+		<ion-item button *ngFor="let dev of civilization | async">
+			<ion-label>
+				<h2>{{ dev.name }}</h2>
+			</ion-label>
+		</ion-item>
+	</ion-list>
+</ion-content>

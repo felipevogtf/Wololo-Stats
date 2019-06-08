@@ -13,6 +13,8 @@ export class HomePage implements OnInit {
 
 	products: Observable<any[]>;
 
+	prueba: Observable<any[]>;
+
 	selectedView = 'devs';
 
 	constructor(private db: DatabaseService) { }
@@ -20,10 +22,17 @@ export class HomePage implements OnInit {
 	ngOnInit() {
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
-				this.developers = this.db.getDevs();;
+				this.developers = this.db.getDevs();
 				this.products = this.db.getProducts();
 			}
 		});
 	}
 
+	probando() {
+		this.db.getDatabaseState().subscribe(rdy => {
+			if (rdy) {
+				this.prueba = this.db.getDevs();
+			}
+		});
+	} 
 }
