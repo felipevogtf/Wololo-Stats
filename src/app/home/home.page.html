@@ -8,32 +8,7 @@
 
 <ion-content padding>
 
-	<ion-button [routerLink]="['/civilization']">List civilization</ion-button>
-	
-	<ion-list>
-		<ion-item *ngFor="let asd of prueba | async">
-			<ion-label>
-				<h2>{{ asd.name }}</h2>
-			</ion-label>
-		</ion-item>
-	</ion-list>
-
-	{{products}}
-	<ion-list>
-		<ion-item *ngFor="let prod of products | async">
-			<ion-label>
-				<h2>{{ prod.name }}</h2>
-			</ion-label>
-		</ion-item>
-	</ion-list>
-
-	<ion-list>
-		<ion-item button *ngFor="let dev of developers | async">
-			<ion-label>
-				<h2>{{ dev.name }}</h2>
-			</ion-label>
-		</ion-item>
-	</ion-list>
-
+	<ion-button [routerLink]="['/civilization']">List civilizations</ion-button>
+	<ion-button [routerLink]="['/unit']">List units</ion-button>
 
 </ion-content>
