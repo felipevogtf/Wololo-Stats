@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'civilization', loadChildren: './civilization/civilization.module#CivilizationPageModule' },  { path: 'unit', loadChildren: './unit/unit.module#UnitPageModule' },
   { path: 'structure', loadChildren: './structure/structure.module#StructurePageModule' },
+  { path: 'technology', loadChildren: './technology/technology.module#TechnologyPageModule' },
 
 ];
 

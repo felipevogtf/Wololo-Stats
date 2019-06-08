@@ -19,6 +19,7 @@ export class DatabaseService {
 	private civilizations = new BehaviorSubject([]);
 	private units = new BehaviorSubject([]);
 	private structures = new BehaviorSubject([]);
+	private technologies = new BehaviorSubject([]);
 
 	constructor(private plt: Platform, private sqlitePorter: SQLitePorter, private sqlite: SQLite, private http: HttpClient) {
 
@@ -40,11 +41,10 @@ export class DatabaseService {
 		.subscribe(sql => {
 			this.sqlitePorter.importSqlToDb(this.database, sql)
 			.then(_ => {
-				this.loadDevelopers();
-				this.loadProducts();
 				this.loadCivilizations();
 				this.loadUnits();
 				this.loadStructures();
+				this.loadTechnologies();
 				this.dbReady.next(true);
 			})
 			.catch(e => console.error(e));	
@@ -73,6 +73,10 @@ export class DatabaseService {
 
 	public getStructures(): Observable<any[]> {
 		return this.structures.asObservable();
+	}
+
+	public getTechnologies(): Observable<any[]> {
+		return this.technologies.asObservable();
 	}
 
 	private loadStructures() {
@@ -160,36 +164,31 @@ export class DatabaseService {
 		});
 	}
 
-	private loadDevelopers() {
-		let query = 'SELECT * FROM unit';
+	private loadTechnologies() {
+		let query = 'SELECT * FROM technology';
 		return this.database.executeSql(query, []).then(data => {
-			let developers = [];
+			let technologies = [];
 			if (data.rows.length > 0) {
 				for (var i = 0; i < data.rows.length; i++) {
-					developers.push({ 
-						name: data.rows.item(i).name
+					technologies.push({ 
+						id: data.rows.item(i).id_technology,
+						name: data.rows.item(i).name,
+						description: data.rows.item(i).description,
+						expansion: data.rows.item(i).expansion,
+						food: data.rows.item(i).food,
+						wood: data.rows.item(i).wood,
+						stone: data.rows.item(i).stone,
+						gold: data.rows.item(i).gold,
+						buildTime: data.rows.item(i).build_time,
+						developsIn: data.rows.item(i).develops_in,
+						civilization: data.rows.item(i).civilization,
+						age: data.rows.item(i).age
 					});
 				}
 			}
-			this.developers.next(developers);
+			this.technologies.next(technologies);
 		});
 	}
 
-	private loadProducts() {
-		let query = 'SELECT * FROM civilization';
-		return this.database.executeSql(query, []).then(data => {
-			let products = [];
-			if (data.rows.length > 0) {
-				for (var i = 0; i < data.rows.length; i++) {
-					products.push({ 
-						name: data.rows.item(i).name,
-						id: data.rows.item(i).id,
-						creator: data.rows.item(i).creator,
-					});
-				}
-			}
-			this.products.next(products);
-		});
-	}
 
 }
