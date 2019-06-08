@@ -16,6 +16,7 @@ export class DatabaseService {
 
 	developers = new BehaviorSubject([]);
 	products = new BehaviorSubject([]);
+	civilizations = new BehaviorSubject([]);
 
 	constructor(private plt: Platform, private sqlitePorter: SQLitePorter, private sqlite: SQLite, private http: HttpClient) {
 
@@ -39,6 +40,7 @@ export class DatabaseService {
 			.then(_ => {
 				this.loadDevelopers();
 				this.loadProducts();
+				this.loadCivilization();
 				this.dbReady.next(true);
 			})
 			.catch(e => console.error(e));
@@ -55,6 +57,32 @@ export class DatabaseService {
 
 	getProducts(): Observable<any[]> {
 		return this.products.asObservable();
+	}
+
+	getCivilizations(): Observable<any[]> {
+		return this.civilizations.asObservable();
+	}
+
+
+	loadCivilization() {
+		let query = 'SELECT * FROM civilization';
+		return this.database.executeSql(query, []).then(data => {
+			let civilizations = [];
+			let bonus = [];
+			if (data.rows.length > 0) {
+				for (var i = 0; i < data.rows.length; i++) {
+					civilizations.push({ 
+						id: data.rows.item(i).id_civilization,
+						name: data.rows.item(i).name,
+						expansion: data.rows.item(i).expansion,
+						characteristic: data.rows.item(i).characteristic_civilization,
+						teamBonus: data.rows.item(i).team_bonus,
+						bonus: JSON.parse(data.rows.item(i).bonus_civilization)
+					});
+				}
+			}
+			this.civilizations.next(civilizations);
+		});
 	}
 
 	loadDevelopers() {

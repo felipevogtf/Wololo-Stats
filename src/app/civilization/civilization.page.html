@@ -1,0 +1,27 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-button [routerLink]="['/home']">home</ion-button>
+		<ion-title>civilization</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<ion-list>
+					<ion-item *ngFor="let civ of civilizations | async">
+						<ion-label>
+							<h1>{{ civ.id }} {{ civ.name }}</h1>
+							<h3>{{ civ.expansion }}</h3>
+							<h3>{{ civ.characteristic }}</h3>
+							<h3>{{ civ.teamBonus }}</h3>
+							<h3 *ngFor="let item of civ.bonus" text-wrap>{{ item }}</h3>
+						</ion-label>
+					</ion-item>
+				</ion-list>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>
