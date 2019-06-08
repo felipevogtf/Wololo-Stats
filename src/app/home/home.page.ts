@@ -13,11 +13,4 @@ export class HomePage implements OnInit {
 	ngOnInit() {
 	}
 
-	probando() {
-		this.db.getDatabaseState().subscribe(rdy => {
-			if (rdy) {
-				this.prueba = this.db.getDevs();
-			}
-		});
-	} 
 }
