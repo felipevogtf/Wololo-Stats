@@ -11,6 +11,15 @@
 	<ion-button [routerLink]="['/civilization']">List civilization</ion-button>
 	
 	<ion-list>
+		<ion-item *ngFor="let asd of prueba | async">
+			<ion-label>
+				<h2>{{ asd.name }}</h2>
+			</ion-label>
+		</ion-item>
+	</ion-list>
+
+	{{products}}
+	<ion-list>
 		<ion-item *ngFor="let prod of products | async">
 			<ion-label>
 				<h2>{{ prod.name }}</h2>
