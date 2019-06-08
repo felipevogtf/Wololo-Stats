@@ -1,0 +1,30 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-button [routerLink]="['/home']">home</ion-button>
+		<ion-title>structure</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<ion-list>
+					<ion-item *ngFor="let structure of structures | async">
+						<ion-label>
+							<h1>{{ structure.id }} {{ structure.name }}</h1>
+							<h3>{{ structure.expansion }}</h3>
+							<h3>{{ structure.wood }}</h3>
+							<h3>{{ structure.stone }}</h3>
+							<h3>{{ structure.gold }}</h3>
+							<h3>{{ structure.buildTime }}</h3>
+							<h3>{{ structure.type }}</h3>
+							<h3>{{ structure.age }}</h3>
+						</ion-label>
+					</ion-item>
+				</ion-list>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

@@ -14,10 +14,11 @@ export class DatabaseService {
 	private database: SQLiteObject;
 	private dbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-	developers = new BehaviorSubject([]);
-	products = new BehaviorSubject([]);
-	civilizations = new BehaviorSubject([]);
-	units = new BehaviorSubject([]);
+	private developers = new BehaviorSubject([]);
+	private products = new BehaviorSubject([]);
+	private civilizations = new BehaviorSubject([]);
+	private units = new BehaviorSubject([]);
+	private structures = new BehaviorSubject([]);
 
 	constructor(private plt: Platform, private sqlitePorter: SQLitePorter, private sqlite: SQLite, private http: HttpClient) {
 
@@ -34,7 +35,7 @@ export class DatabaseService {
 
 	}
 
-	seedDatabase() {
+	private seedDatabase() {
 		this.http.get('assets/aoe2.sql', { responseType: 'text'})
 		.subscribe(sql => {
 			this.sqlitePorter.importSqlToDb(this.database, sql)
@@ -43,33 +44,61 @@ export class DatabaseService {
 				this.loadProducts();
 				this.loadCivilizations();
 				this.loadUnits();
+				this.loadStructures();
 				this.dbReady.next(true);
 			})
-			.catch(e => console.error(e));
+			.catch(e => console.error(e));	
 		});
 	}
 
-	getDatabaseState() {
+	public getDatabaseState() {
 		return this.dbReady.asObservable();
 	}
 
-	getDevs(): Observable<any[]> {
+	public getDevs(): Observable<any[]> {
 		return this.developers.asObservable();
 	}
 
-	getProducts(): Observable<any[]> {
+	public getProducts(): Observable<any[]> {
 		return this.products.asObservable();
 	}
 
-	getCivilizations(): Observable<any[]> {
+	public getCivilizations(): Observable<any[]> {
 		return this.civilizations.asObservable();
 	}
-	getUnits(): Observable<any[]> {
+
+	public getUnits(): Observable<any[]> {
 		return this.units.asObservable();
 	}
 
+	public getStructures(): Observable<any[]> {
+		return this.structures.asObservable();
+	}
 
-	loadCivilizations() {
+	private loadStructures() {
+		let query = 'SELECT * FROM structure';
+		return this.database.executeSql(query, []).then(data => {
+			let structures = [];
+			if (data.rows.length > 0) {
+				for (var i = 0; i < data.rows.length; i++) {
+					structures.push({ 
+						id: data.rows.item(i).id_structure,
+						name: data.rows.item(i).name,
+						expansion: data.rows.item(i).expansion,
+						wood: data.rows.item(i).wood,
+						stone: data.rows.item(i).stone,
+						gold: data.rows.item(i).gold,
+						buildTime: data.rows.item(i).build_time,
+						type: data.rows.item(i).type,
+						age: data.rows.item(i).age
+					});
+				}
+			}
+			this.structures.next(structures);
+		});
+	}
+
+	private loadCivilizations() {
 		let query = 'SELECT * FROM civilization';
 		return this.database.executeSql(query, []).then(data => {
 			let civilizations = [];
@@ -90,7 +119,7 @@ export class DatabaseService {
 		});
 	}
 
-	loadUnits() {
+	private loadUnits() {
 		let query = 'SELECT * FROM unit';
 		return this.database.executeSql(query, []).then(data => {
 			let units = [];
@@ -131,7 +160,7 @@ export class DatabaseService {
 		});
 	}
 
-	loadDevelopers() {
+	private loadDevelopers() {
 		let query = 'SELECT * FROM unit';
 		return this.database.executeSql(query, []).then(data => {
 			let developers = [];
@@ -146,7 +175,7 @@ export class DatabaseService {
 		});
 	}
 
-	loadProducts() {
+	private loadProducts() {
 		let query = 'SELECT * FROM civilization';
 		return this.database.executeSql(query, []).then(data => {
 			let products = [];
