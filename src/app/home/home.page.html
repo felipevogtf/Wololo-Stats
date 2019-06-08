@@ -6,9 +6,10 @@
 	</ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
 
-	<ion-button color="primary" [routerLink]="['/civilization']">Primary</ion-button>
+	<ion-button [routerLink]="['/civilization']">List civilization</ion-button>
+	
 	<ion-list>
 		<ion-item *ngFor="let asd of prueba | async">
 			<ion-label>

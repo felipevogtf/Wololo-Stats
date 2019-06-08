@@ -9,16 +9,15 @@ import { Observable } from 'rxjs';
 })
 export class CivilizationPage implements OnInit {
 
-	civilization: Observable<any[]>;
+	civilizations: Observable<any[]>;
 
 	constructor(private db: DatabaseService) { }
 
 	ngOnInit() {
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
-				this.civilization = this.db.getDevs();
+				this.civilizations = this.db.getCivilizations();
 			}
 		});
 	}
-
 }
