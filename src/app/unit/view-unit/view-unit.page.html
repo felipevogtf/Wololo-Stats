@@ -1,0 +1,33 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>viewunit</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-button [routerLink]="['/home']">home</ion-button>
+	<h1>{{ unit.id }} {{ unit.name }}</h1>
+	<h3>{{ unit.expansion }}</h3>
+	<h3>{{ unit.buildTime }}</h3>
+	<h3>{{ unit.hitPoints }}</h3>
+	<h3>{{ unit.frameDelay }}</h3>
+	<h3>{{ unit.rateOfFire }}</h3>
+	<h3>{{ unit.range }}</h3>
+	<h3>{{ unit.accuracy }}</h3>
+	<h3>{{ unit.projectileSpeed }}</h3>
+	<h3>{{ unit.meleeArmor }}</h3>
+	<h3>{{ unit.pierceArmor }}</h3>
+	<h3>{{ unit.speed }}</h3>
+	<h3>{{ unit.lineOfSight }}</h3>
+	<h3>{{ unit.garrison }}</h3>
+	<h3>{{ unit.blastRadius }}</h3>
+	<h3>{{ unit.wood }}</h3>
+	<h3>{{ unit.gold }}</h3>
+	<h3>{{ unit.stone }}</h3>
+	<h3>{{ unit.food }}</h3>
+	<h3>{{ unit.attack }}</h3>
+	<h3>{{ unit.createdIn }}</h3>
+	<h3>{{ unit.civilization }}</h3>
+	<h3>{{ unit.age }}</h3>
+	<h3 *ngFor="let item of unit.attackBonus" text-wrap>{{ item }}</h3>
+</ion-content>

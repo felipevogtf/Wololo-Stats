@@ -78,10 +78,11 @@ export class DatabaseService {
 	public getTechnologies(): Observable<any[]> {
 		return this.technologies.asObservable();
 	}
+	
 	public getCivilization(id) {
 		return this.database.executeSql('SELECT * FROM civilization WHERE id_civilization = ?', [id]).then(data => {
 			let bonus = [];
-			if (data.rows.item(0).skills != '') {
+			if (data.rows.item(0).bonus_civilization != '') {
 				bonus = JSON.parse(data.rows.item(0).bonus_civilization);
 			}
 
@@ -96,6 +97,45 @@ export class DatabaseService {
 			}
 		});
 	}
+
+	public getUnit(id) {
+		return this.database.executeSql('SELECT * FROM unit WHERE id_unit = ?', [id]).then(data => {
+			let attackBonus = [];
+			if (data.rows.item(0).attack_bonus != '') {
+				attackBonus = JSON.parse(data.rows.item(0).attack_bonus);
+			}
+
+			return {
+				id: data.rows.item(0).id_unit,
+				name: data.rows.item(0).name,
+				expansion: data.rows.item(0).expansion,
+				buildTime: data.rows.item(0).build_time,
+				hitPoints: data.rows.item(0).hit_points,
+				rateOfFire: data.rows.item(0).rate_of_fire,
+				frameDelay: data.rows.item(0).frame_delay,
+				range: data.rows.item(0).range,
+				accuracy: data.rows.item(0).accuracy,
+				projectileSpeed: data.rows.item(0).projectile_speed,
+				meleeArmor: data.rows.item(0).melee_armor,
+				pierceArmor: data.rows.item(0).pierce_armor,
+				speed: data.rows.item(0).speed,
+				lineOfSight: data.rows.item(0).line_of_sight,
+				garrison: data.rows.item(0).garrison,
+				blastRadius: data.rows.item(0).blast_radius,
+				wood: data.rows.item(0).wood,
+				gold: data.rows.item(0).gold,
+				stone: data.rows.item(0).stone,
+				food: data.rows.item(0).food,
+				attack: data.rows.item(0).attack,
+				createdIn: data.rows.item(0).created_in,
+				civilization: data.rows.item(0).civilization,
+				age: data.rows.item(0).age,
+				attackBonus: attackBonus
+
+			}
+		});
+	}
+
 	private loadStructures() {
 		let query = 'SELECT * FROM structure';
 		return this.database.executeSql(query, []).then(data => {

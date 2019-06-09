@@ -13,6 +13,7 @@
 				<ion-list>
 					<ion-item *ngFor="let unit of units | async">
 						<ion-label>
+							<ion-button [routerLink]="['/unit', unit.id]">go</ion-button>
 							<h1>{{ unit.id }} {{ unit.name }}</h1>
 							<h3>{{ unit.expansion }}</h3>
 							<h3>{{ unit.buildTime }}</h3>
