@@ -25,7 +25,7 @@ export class DatabaseService {
 
 		this.plt.ready().then(() => {
 			this.sqlite.create({
-				name: 'aoe22.db',
+				name: 'aoe2def.db',
 				location: 'default'
 			})
 			.then((db: SQLiteObject) => {
@@ -120,19 +120,14 @@ export class DatabaseService {
 	}
 
 	private loadCivilizations() {
-		let query = 'SELECT * FROM civilization';
+		let query = 'SELECT id_civilization, name FROM civilization';
 		return this.database.executeSql(query, []).then(data => {
 			let civilizations = [];
-			let bonus = [];
 			if (data.rows.length > 0) {
 				for (var i = 0; i < data.rows.length; i++) {
 					civilizations.push({ 
 						id: data.rows.item(i).id_civilization,
-						name: data.rows.item(i).name,
-						expansion: data.rows.item(i).expansion,
-						characteristic: data.rows.item(i).characteristic_civilization,
-						teamBonus: data.rows.item(i).team_bonus,
-						bonus: JSON.parse(data.rows.item(i).bonus_civilization)
+						name: data.rows.item(i).name
 					});
 				}
 			}
