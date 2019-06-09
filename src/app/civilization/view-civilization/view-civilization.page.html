@@ -1,0 +1,14 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>viewcilization</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-button [routerLink]="['/home']">home</ion-button>
+	<h1>{{ civilization.id }} {{ civilization.name }}</h1>
+	<h3>{{ civilization.expansion }}</h3>
+	<h3>{{ civilization.characteristic }}</h3>
+	<h3>{{ civilization.teamBonus }}</h3>
+	<h3 *ngFor="let item of civilization.bonus" text-wrap>{{ item }}</h3>
+</ion-content>
