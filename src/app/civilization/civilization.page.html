@@ -13,6 +13,7 @@
 				<ion-list>
 					<ion-item *ngFor="let civ of civilizations | async">
 						<ion-label>
+							<ion-button [routerLink]="['/civilization', civ.id]">go</ion-button>
 							<h1>{{ civ.id }} {{ civ.name }}</h1>
 							<h3>{{ civ.expansion }}</h3>
 							<h3>{{ civ.characteristic }}</h3>

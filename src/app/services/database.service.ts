@@ -78,7 +78,24 @@ export class DatabaseService {
 	public getTechnologies(): Observable<any[]> {
 		return this.technologies.asObservable();
 	}
+	public getCivilization(id) {
+		return this.database.executeSql('SELECT * FROM civilization WHERE id_civilization = ?', [id]).then(data => {
+			let bonus = [];
+			if (data.rows.item(0).skills != '') {
+				bonus = JSON.parse(data.rows.item(0).bonus_civilization);
+			}
 
+			return {
+				id: data.rows.item(0).id_civilization,
+				name: data.rows.item(0).name,
+				expansion: data.rows.item(0).expansion,
+				characteristic: data.rows.item(0).characteristic_civilization,
+				teamBonus: data.rows.item(0).team_bonus,
+				bonus: bonus
+
+			}
+		});
+	}
 	private loadStructures() {
 		let query = 'SELECT * FROM structure';
 		return this.database.executeSql(query, []).then(data => {

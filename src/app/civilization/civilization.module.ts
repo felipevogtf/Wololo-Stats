@@ -8,18 +8,22 @@ import { IonicModule } from '@ionic/angular';
 import { CivilizationPage } from './civilization.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: CivilizationPage
-  }
+{
+  path: '',
+  component: CivilizationPage,
+},
+{
+  path: ':id',
+  loadChildren: './view-civilization/view-civilization.module#ViewCivilizationPageModule',
+}
 ];
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
+  CommonModule,
+  FormsModule,
+  IonicModule,
+  RouterModule.forChild(routes)
   ],
   declarations: [CivilizationPage]
 })
