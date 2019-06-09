@@ -8,18 +8,22 @@ import { IonicModule } from '@ionic/angular';
 import { StructurePage } from './structure.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: StructurePage
-  }
+{
+  path: '',
+  component: StructurePage
+},
+{
+  path: ':id',
+  loadChildren: './view-structure/view-structure.module#ViewStructurePageModule'
+}
 ];
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
+  CommonModule,
+  FormsModule,
+  IonicModule,
+  RouterModule.forChild(routes)
   ],
   declarations: [StructurePage]
 })
