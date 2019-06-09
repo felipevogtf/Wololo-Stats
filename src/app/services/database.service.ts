@@ -135,6 +135,21 @@ export class DatabaseService {
 		});
 	}
 
+	public getStructure(id) {
+		return this.database.executeSql('SELECT * FROM structure WHERE id_structure = ?', [id]).then(data => {
+			return {
+				id: data.rows.item(0).id_structure,
+				name: data.rows.item(0).name,
+				expansion: data.rows.item(0).expansion,
+				wood: data.rows.item(0).wood,
+				stone: data.rows.item(0).stone,
+				gold: data.rows.item(0).gold,
+				buildTime: data.rows.item(0).build_time,
+				type: data.rows.item(0).type,
+				age: data.rows.item(0).age
+			}
+		});
+	}
 	private loadStructures() {
 		let query = 'SELECT * FROM structure';
 		return this.database.executeSql(query, []).then(data => {
@@ -143,14 +158,7 @@ export class DatabaseService {
 				for (var i = 0; i < data.rows.length; i++) {
 					structures.push({ 
 						id: data.rows.item(i).id_structure,
-						name: data.rows.item(i).name,
-						expansion: data.rows.item(i).expansion,
-						wood: data.rows.item(i).wood,
-						stone: data.rows.item(i).stone,
-						gold: data.rows.item(i).gold,
-						buildTime: data.rows.item(i).build_time,
-						type: data.rows.item(i).type,
-						age: data.rows.item(i).age
+						name: data.rows.item(i).name
 					});
 				}
 			}
