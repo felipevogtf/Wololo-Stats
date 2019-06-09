@@ -5,26 +5,22 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UnitPage } from './unit.page';
+import { ViewUnitPage } from './view-unit.page';
 
 const routes: Routes = [
-{
-  path: '',
-  component: UnitPage
-},
-{
-  path: ':id',
-  loadChildren: './view-unit/view-unit.module#ViewUnitPageModule',
-}
+  {
+    path: '',
+    component: ViewUnitPage
+  }
 ];
 
 @NgModule({
   imports: [
-  CommonModule,
-  FormsModule,
-  IonicModule,
-  RouterModule.forChild(routes)
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild(routes)
   ],
-  declarations: [UnitPage]
+  declarations: [ViewUnitPage]
 })
-export class UnitPageModule {}
+export class ViewUnitPageModule {}

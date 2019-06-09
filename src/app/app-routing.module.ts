@@ -9,6 +9,7 @@ const routes: Routes = [
 { path: 'structure', loadChildren: './structure/structure.module#StructurePageModule' },
 { path: 'technology', loadChildren: './technology/technology.module#TechnologyPageModule' },
 
+
 ];
 
 @NgModule({
