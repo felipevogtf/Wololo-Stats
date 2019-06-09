@@ -11,9 +11,8 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-item *ngFor="let civ of civilizations | async">
+					<ion-item button *ngFor="let civ of civilizations | async" [routerLink]="['/civilization', civ.id]">
 						<ion-label>
-							<ion-button [routerLink]="['/civilization', civ.id]">go</ion-button>
 							<h1>{{ civ.id }} {{ civ.name }}</h1>
 						</ion-label>
 					</ion-item>

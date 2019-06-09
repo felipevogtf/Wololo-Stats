@@ -78,7 +78,7 @@ export class DatabaseService {
 	public getTechnologies(): Observable<any[]> {
 		return this.technologies.asObservable();
 	}
-	
+
 	public getCivilization(id) {
 		return this.database.executeSql('SELECT * FROM civilization WHERE id_civilization = ?', [id]).then(data => {
 			let bonus = [];
@@ -131,7 +131,6 @@ export class DatabaseService {
 				civilization: data.rows.item(0).civilization,
 				age: data.rows.item(0).age,
 				attackBonus: attackBonus
-
 			}
 		});
 	}
@@ -176,39 +175,14 @@ export class DatabaseService {
 	}
 
 	private loadUnits() {
-		let query = 'SELECT * FROM unit';
+		let query = 'SELECT id_unit, name FROM unit';
 		return this.database.executeSql(query, []).then(data => {
 			let units = [];
-			let attackBonus = [];
 			if (data.rows.length > 0) {
 				for (var i = 0; i < data.rows.length; i++) {
 					units.push({ 
 						id: data.rows.item(i).id_unit,
-						name: data.rows.item(i).name,
-						expansion: data.rows.item(i).expansion,
-						buildTime: data.rows.item(i).build_time,
-						hitPoints: data.rows.item(i).hit_points,
-						rateOfFire: data.rows.item(i).rate_of_fire,
-						frameDelay: data.rows.item(i).frame_delay,
-						range: data.rows.item(i).range,
-						accuracy: data.rows.item(i).accuracy,
-						projectileSpeed: data.rows.item(i).projectile_speed,
-						meleeArmor: data.rows.item(i).melee_armor,
-						pierceArmor: data.rows.item(i).pierce_armor,
-						speed: data.rows.item(i).speed,
-						lineOfSight: data.rows.item(i).line_of_sight,
-						garrison: data.rows.item(i).garrison,
-						blastRadius: data.rows.item(i).blast_radius,
-						wood: data.rows.item(i).wood,
-						gold: data.rows.item(i).gold,
-						stone: data.rows.item(i).stone,
-						food: data.rows.item(i).food,
-						attack: data.rows.item(i).attack,
-						createdIn: data.rows.item(i).created_in,
-						civilization: data.rows.item(i).civilization,
-						age: data.rows.item(i).age,
-						attackBonus: JSON.parse(data.rows.item(i).attack_bonus)
-
+						name: data.rows.item(i).name
 					});
 				}
 			}
