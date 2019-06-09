@@ -11,19 +11,9 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-item *ngFor="let technology of technologies | async">
+					<ion-item button *ngFor="let technology of technologies | async" [routerLink]="['/technology', technology.id]">
 						<ion-label>
 							<h1>{{ technology.id }} {{ technology.name }}</h1>
-							<h3>{{ technology.description }}</h3>
-							<h3>{{ technology.expansion }}</h3>
-							<h3>{{ technology.food }}</h3>
-							<h3>{{ technology.wood }}</h3>
-							<h3>{{ technology.stone }}</h3>
-							<h3>{{ technology.gold }}</h3>
-							<h3>{{ technology.buildTime }}</h3>
-							<h3>{{ technology.developsIn }}</h3>
-							<h3>{{ technology.civilization }}</h3>
-							<h3>{{ technology.age }}</h3>
 						</ion-label>
 					</ion-item>
 				</ion-list>
