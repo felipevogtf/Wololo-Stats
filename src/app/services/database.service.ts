@@ -150,8 +150,27 @@ export class DatabaseService {
 			}
 		});
 	}
+
+	public getTechnology(id) {
+		return this.database.executeSql('SELECT * FROM technology WHERE id_technology = ?', [id]).then(data => {
+			return {
+				id: data.rows.item(0).id_technology,
+				name: data.rows.item(0).name,
+				description: data.rows.item(0).description,
+				expansion: data.rows.item(0).expansion,
+				food: data.rows.item(0).food,
+				wood: data.rows.item(0).wood,
+				stone: data.rows.item(0).stone,
+				gold: data.rows.item(0).gold,
+				buildTime: data.rows.item(0).build_time,
+				developsIn: data.rows.item(0).develops_in,
+				civilization: data.rows.item(0).civilization,
+				age: data.rows.item(0).age
+			}
+		});
+	}
 	private loadStructures() {
-		let query = 'SELECT * FROM structure';
+		let query = 'SELECT id_structure, name FROM structure';
 		return this.database.executeSql(query, []).then(data => {
 			let structures = [];
 			if (data.rows.length > 0) {
@@ -199,24 +218,14 @@ export class DatabaseService {
 	}
 
 	private loadTechnologies() {
-		let query = 'SELECT * FROM technology';
+		let query = 'SELECT id_technology, name FROM technology';
 		return this.database.executeSql(query, []).then(data => {
 			let technologies = [];
 			if (data.rows.length > 0) {
 				for (var i = 0; i < data.rows.length; i++) {
 					technologies.push({ 
 						id: data.rows.item(i).id_technology,
-						name: data.rows.item(i).name,
-						description: data.rows.item(i).description,
-						expansion: data.rows.item(i).expansion,
-						food: data.rows.item(i).food,
-						wood: data.rows.item(i).wood,
-						stone: data.rows.item(i).stone,
-						gold: data.rows.item(i).gold,
-						buildTime: data.rows.item(i).build_time,
-						developsIn: data.rows.item(i).develops_in,
-						civilization: data.rows.item(i).civilization,
-						age: data.rows.item(i).age
+						name: data.rows.item(i).name
 					});
 				}
 			}
