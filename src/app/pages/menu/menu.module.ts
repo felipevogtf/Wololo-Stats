@@ -31,6 +31,10 @@ const routes: Routes = [
       { 
         path: 'technology', 
         loadChildren: '../technology/technology.module#TechnologyPageModule' 
+      },
+      { 
+        path: 'compare', 
+        loadChildren: '../compare/compare.module#ComparePageModule' 
       }
     ]
   },

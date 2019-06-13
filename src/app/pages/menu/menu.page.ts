@@ -29,6 +29,10 @@ export class MenuPage implements OnInit {
 		tittle: 'Technology',
 		url: '/menu/technology'
 	},
+	{
+		tittle: 'Compare',
+		url: '/menu/compare'
+	},
 	];
 
 	constructor() {
