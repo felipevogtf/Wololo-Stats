@@ -1,4 +1,4 @@
-import { DatabaseService } from './../services/database.service';
+import { DatabaseService } from './../../services/database.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -15,6 +15,7 @@ export class StructurePage implements OnInit {
 	constructor(private db: DatabaseService) { }
 
 	ngOnInit() {
+		
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
 				this.structures = this.db.getStructures();
