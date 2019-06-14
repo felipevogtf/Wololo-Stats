@@ -1,0 +1,29 @@
+ion-content{
+	--ion-background-color: var(--ion-color-light-tint);
+}
+ion-toolbar{
+	--ion-toolbar-background: var(--ion-color-light-tint);
+}
+ion-card{
+	background-color: white;
+	box-shadow: none;
+	border-radius: 15px;
+}
+
+ion-img{
+	display: block;
+	margin: auto;
+	width: 10vw;
+	height: auto;
+}
+
+ion-grid{
+	margin-top: 5vh;
+}
+
+.logo{
+	margin-top: 5vh;
+	width: 90vw;
+	max-width: 500px;
+	height: auto;
+}

@@ -1,0 +1,25 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>civilization</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<ion-list>
+					<ion-item button *ngFor="let civ of civilizations | async" [routerLink]="['/civilization', civ.id]">
+						<ion-label>
+							<h1>{{ civ.id }} {{ civ.name }}</h1>
+						</ion-label>
+					</ion-item>
+				</ion-list>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

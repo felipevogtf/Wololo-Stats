@@ -1,0 +1,26 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>unit</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<ion-list>
+					<ion-item button *ngFor="let unit of units | async" [routerLink]="['/unit', unit.id]">
+						<ion-label >
+							<h1>{{ unit.id }} {{ unit.name }}</h1>
+							<h3 *ngFor="let item of unit.attackBonus" text-wrap>{{ item }}</h3>
+						</ion-label>
+					</ion-item>
+				</ion-list>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>
