@@ -186,14 +186,15 @@ export class DatabaseService {
 	}
 
 	private loadCivilizations() {
-		let query = 'SELECT id_civilization, name FROM civilization';
+		let query = 'SELECT id_civilization, name, characteristic_civilization FROM civilization';
 		return this.database.executeSql(query, []).then(data => {
 			let civilizations = [];
 			if (data.rows.length > 0) {
 				for (var i = 0; i < data.rows.length; i++) {
 					civilizations.push({ 
 						id: data.rows.item(i).id_civilization,
-						name: data.rows.item(i).name
+						name: data.rows.item(i).name,
+						description: data.rows.item(i).characteristic_civilization,
 					});
 				}
 			}

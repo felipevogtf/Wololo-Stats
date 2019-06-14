@@ -1,9 +1,15 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-buttons slot="start">
+		<ion-buttons slot="start" *ngIf="!isSearchBarOpened">
 			<ion-menu-button></ion-menu-button>
 		</ion-buttons>
-		<ion-title>civilization</ion-title>
+		<ion-title *ngIf="!isSearchBarOpened">Civilizaciones</ion-title>
+		<ion-searchbar *ngIf="isSearchBarOpened" showCancelButton debounce="500" (ionCancel)="isSearchBarOpened = false" animated="true"></ion-searchbar>
+		<ion-buttons slot="end" *ngIf="!isSearchBarOpened">
+			<ion-button icon-only (click)="isSearchBarOpened = true">
+				<ion-icon name="search"></ion-icon>
+			</ion-button>
+		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
 
@@ -13,12 +19,13 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-item button *ngFor="let civilization of civilizations | async" [routerLink]="['/civilization', civilization.id]">
+					<ion-item button *ngFor="let civilization of civilizations | async" [routerLink]="['/menu/civilization', civilization.id]">
 						<ion-avatar slot="start">
 							<img src="assets/icon/civilization/{{civilization.name}}.jpg">
 						</ion-avatar>
 						<ion-label>
-							<h1>{{ civilization.id }} {{ civilization.name }}</h1>
+							<h2>{{ civilization.name }}</h2>
+							<p>{{ civilization.description }}</p>
 						</ion-label>
 					</ion-item>
 				</ion-list>

@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class CivilizationPage implements OnInit {
 
 	civilizations: Observable<any[]>;
+	isSearchBarOpened = false;
 
 	constructor(private db: DatabaseService) { }
 
