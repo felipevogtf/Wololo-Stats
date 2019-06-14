@@ -1,5 +1,5 @@
 ion-content{
-	--ion-background-color: #f4f5f8;
+	--ion-background-color: var(--ion-color-light-tint);
 }
 ion-toolbar{
 	--ion-toolbar-background: var(--ion-color-light-tint);
