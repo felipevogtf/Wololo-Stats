@@ -13,9 +13,12 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-item button *ngFor="let civ of civilizations | async" [routerLink]="['/civilization', civ.id]">
+					<ion-item button *ngFor="let civilization of civilizations | async" [routerLink]="['/civilization', civilization.id]">
+						<ion-avatar slot="start">
+							<img src="assets/icon/civilization/{{civilization.name}}.jpg">
+						</ion-avatar>
 						<ion-label>
-							<h1>{{ civ.id }} {{ civ.name }}</h1>
+							<h1>{{ civilization.id }} {{ civilization.name }}</h1>
 						</ion-label>
 					</ion-item>
 				</ion-list>
