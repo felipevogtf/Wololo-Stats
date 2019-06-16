@@ -21,12 +21,11 @@
 </ion-header>
 
 <ion-content>
-
 	<ion-grid>
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-item button *ngFor="let civilization of civilizations | async | filterBy: ['name']: name" [routerLink]="['/menu/civilization', civilization.id]">
+					<ion-item button *ngFor="let civilization of civilizations | filterBy: ['name']: name" [routerLink]="['/menu/civilization', civilization.id]">
 						<ion-avatar slot="start">
 							<img src="assets/icon/civilization/{{civilization.name}}.jpg">
 						</ion-avatar>

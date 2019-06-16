@@ -18,7 +18,7 @@ export class DatabaseService {
 
 		this.plt.ready().then(() => {
 			this.sqlite.create({
-				name: 'aoe2def.db',
+				name: 'ageofempire2.db',
 				location: 'default'
 			})
 			.then((db: SQLiteObject) => {

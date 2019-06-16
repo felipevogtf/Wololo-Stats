@@ -33,7 +33,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class CivilizationPage implements OnInit {
 
-	civilizations: Promise<any[]>;
+	civilizations = [];
 	isOpen = true;
 	name = "";
 	
@@ -41,10 +41,14 @@ export class CivilizationPage implements OnInit {
 
 	constructor(private db: DatabaseService) { }
 
+
+
 	ngOnInit() {
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
-				this.civilizations = this.db.loadCivilizations();
+				this.db.loadCivilizations().then(data => {
+					this.civilizations = this.civilizations.concat(data);
+				});
 			}
 		});
 	}

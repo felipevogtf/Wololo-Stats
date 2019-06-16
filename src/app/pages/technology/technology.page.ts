@@ -1,15 +1,43 @@
 import { DatabaseService } from './../../services/database.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IonSearchbar } from '@ionic/angular';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
 	selector: 'app-technology',
 	templateUrl: './technology.page.html',
 	styleUrls: ['./technology.page.scss'],
+	animations: [
+	trigger('openClose', [
+		// ...
+		state('open', style({
+			visibility: 'visible',
+			opacity: 1
+		})),
+		state('closed', style({
+			visibility: 'hidden',
+			height: 0,
+			width: 0,
+			opacity: 0
+		})),
+		transition('open => closed', [
+			animate('0.3s')
+			]),
+		transition('closed => open', [
+			animate('0.7s')
+			]),
+		]),
+	],
 })
 export class TechnologyPage implements OnInit {
 
 	technologies: Promise<any[]>;
+
+	isOpen = true;
+	name = "";
+
+	@ViewChild (IonSearchbar) public searchbar: IonSearchbar;
 
 	constructor(private db: DatabaseService) { }
 
@@ -19,5 +47,16 @@ export class TechnologyPage implements OnInit {
 				this.technologies = this.db.loadTechnologies();
 			}
 		});
+	}
+
+	onSearch(event){
+		this.name = event.target.value;
+	}
+	openSearch(){
+		this.isOpen = false;
+		setTimeout(() => this.searchbar.setFocus(), 500);
+	}
+	closeSearch(){
+		this.isOpen = true;
 	}
 }
