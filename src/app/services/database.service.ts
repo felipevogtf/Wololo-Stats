@@ -14,13 +14,6 @@ export class DatabaseService {
 	private database: SQLiteObject;
 	private dbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-	private developers = new BehaviorSubject([]);
-	private products = new BehaviorSubject([]);
-	private civilizations = new BehaviorSubject([]);
-	private units = new BehaviorSubject([]);
-	private structures = new BehaviorSubject([]);
-	private technologies = new BehaviorSubject([]);
-
 	constructor(private plt: Platform, private sqlitePorter: SQLitePorter, private sqlite: SQLite, private http: HttpClient) {
 
 		this.plt.ready().then(() => {
@@ -41,10 +34,6 @@ export class DatabaseService {
 		.subscribe(sql => {
 			this.sqlitePorter.importSqlToDb(this.database, sql)
 			.then(_ => {
-				this.loadCivilizations();
-				this.loadUnits();
-				this.loadStructures();
-				this.loadTechnologies();
 				this.dbReady.next(true);
 			})
 			.catch(e => console.error(e));	
@@ -53,30 +42,6 @@ export class DatabaseService {
 
 	public getDatabaseState() {
 		return this.dbReady.asObservable();
-	}
-
-	public getDevs(): Observable<any[]> {
-		return this.developers.asObservable();
-	}
-
-	public getProducts(): Observable<any[]> {
-		return this.products.asObservable();
-	}
-
-	public getCivilizations(): Observable<any[]> {
-		return this.civilizations.asObservable();
-	}
-
-	public getUnits(): Observable<any[]> {
-		return this.units.asObservable();
-	}
-
-	public getStructures(): Observable<any[]> {
-		return this.structures.asObservable();
-	}
-
-	public getTechnologies(): Observable<any[]> {
-		return this.technologies.asObservable();
 	}
 
 	public getCivilization(id) {
@@ -169,7 +134,8 @@ export class DatabaseService {
 			}
 		});
 	}
-	private loadStructures() {
+
+	public loadStructures() {
 		let query = 'SELECT id_structure, name FROM structure';
 		return this.database.executeSql(query, []).then(data => {
 			let structures = [];
@@ -181,11 +147,11 @@ export class DatabaseService {
 					});
 				}
 			}
-			this.structures.next(structures);
+			return structures;
 		});
 	}
 
-	private loadCivilizations() {
+	public loadCivilizations() {
 		let query = 'SELECT id_civilization, name, characteristic_civilization FROM civilization';
 		return this.database.executeSql(query, []).then(data => {
 			let civilizations = [];
@@ -198,11 +164,11 @@ export class DatabaseService {
 					});
 				}
 			}
-			this.civilizations.next(civilizations);
+			return civilizations;
 		});
 	}
 
-	private loadUnits() {
+	public loadUnits() {
 		let query = 'SELECT id_unit, name FROM unit';
 		return this.database.executeSql(query, []).then(data => {
 			let units = [];
@@ -214,11 +180,11 @@ export class DatabaseService {
 					});
 				}
 			}
-			this.units.next(units);
+			return units;
 		});
 	}
 
-	private loadTechnologies() {
+	public loadTechnologies() {
 		let query = 'SELECT id_technology, name FROM technology';
 		return this.database.executeSql(query, []).then(data => {
 			let technologies = [];
@@ -230,7 +196,7 @@ export class DatabaseService {
 					});
 				}
 			}
-			this.technologies.next(technologies);
+			return technologies;
 		});
 	}
 

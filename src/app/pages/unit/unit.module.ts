@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { UnitPage } from './unit.page';
+import { NgPipesModule } from 'ngx-pipes';
 
 const routes: Routes = [
 {
@@ -20,6 +21,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+  NgPipesModule,
   CommonModule,
   FormsModule,
   IonicModule,

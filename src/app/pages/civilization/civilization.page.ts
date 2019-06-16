@@ -33,18 +33,18 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class CivilizationPage implements OnInit {
 
-	civilizations: Observable<any[]>;
+	civilizations: Promise<any[]>;
 	isOpen = true;
 	name = "";
+	
 	@ViewChild (IonSearchbar) public searchbar: IonSearchbar;
 
 	constructor(private db: DatabaseService) { }
 
 	ngOnInit() {
-		
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
-				this.civilizations = this.db.getCivilizations();
+				this.civilizations = this.db.loadCivilizations();
 			}
 		});
 	}
@@ -60,8 +60,4 @@ export class CivilizationPage implements OnInit {
 		this.isOpen = true;
 	}
 
-
-	toggle() {
-		this.isOpen = !this.isOpen;
-	}
 }

@@ -1,10 +1,23 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-buttons slot="start">
+		<ion-buttons slot="start" [@openClose]="isOpen ? 'open' : 'closed'">
 			<ion-menu-button></ion-menu-button>
 		</ion-buttons>
-		<ion-title>unit</ion-title>
-	</ion-toolbar>
+		<ion-title [@openClose]="isOpen ? 'open' : 'closed'">Unidades</ion-title>
+		<ion-searchbar 
+		[@openClose]="!isOpen ? 'open' : 'closed'"
+		placeholder="Buscar Unidades..." 
+		showCancelButton debounce="500" 
+		(ionInput)="onSearch($event)" 
+		(ionCancel)="closeSearch()"
+		animated >
+	</ion-searchbar>
+	<ion-buttons slot="end" [@openClose]="isOpen ? 'open' : 'closed'">
+		<ion-button icon-only size="large" (click)="openSearch()">
+			<ion-icon name="search"></ion-icon>
+		</ion-button>
+	</ion-buttons>
+</ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -13,10 +26,12 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-item button *ngFor="let unit of units | async" [routerLink]="['/unit', unit.id]">
+					<ion-item button *ngFor="let unit of units | async | filterBy: ['name']: name" [routerLink]="['/unit', unit.id]">
+						<ion-avatar slot="start">
+							<img src="assets/icon/unit/{{unit.name}}.png">
+						</ion-avatar>
 						<ion-label >
-							<h1>{{ unit.id }} {{ unit.name }}</h1>
-							<h3 *ngFor="let item of unit.attackBonus" text-wrap>{{ item }}</h3>
+							<h2>{{ unit.name }}</h2>
 						</ion-label>
 					</ion-item>
 				</ion-list>

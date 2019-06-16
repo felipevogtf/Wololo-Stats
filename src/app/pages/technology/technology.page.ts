@@ -9,14 +9,14 @@ import { Observable } from 'rxjs';
 })
 export class TechnologyPage implements OnInit {
 
-	technologies: Observable<any[]>;
+	technologies: Promise<any[]>;
 
 	constructor(private db: DatabaseService) { }
 
 	ngOnInit() {
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
-				this.technologies = this.db.getTechnologies();
+				this.technologies = this.db.loadTechnologies();
 			}
 		});
 	}

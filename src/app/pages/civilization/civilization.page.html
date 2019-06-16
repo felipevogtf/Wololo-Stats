@@ -6,7 +6,7 @@
 		<ion-title [@openClose]="isOpen ? 'open' : 'closed'">Civilizaciones</ion-title>
 		<ion-searchbar 
 		[@openClose]="!isOpen ? 'open' : 'closed'"
-		placeholder="Buscar Civilizacion..." 
+		placeholder="Buscar Civilización..." 
 		showCancelButton debounce="500" 
 		(ionInput)="onSearch($event)" 
 		(ionCancel)="closeSearch()"
@@ -21,6 +21,7 @@
 </ion-header>
 
 <ion-content>
+
 	<ion-grid>
 		<ion-row>
 			<ion-col>
