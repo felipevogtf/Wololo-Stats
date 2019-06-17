@@ -61,4 +61,5 @@ export class StructurePage {
 	closeSearch(){
 		this.isOpen = true;
 	}
+
 }

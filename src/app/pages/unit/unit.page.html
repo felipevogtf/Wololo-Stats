@@ -26,7 +26,7 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-item button *ngFor="let unit of units | filterBy: ['name']: name" class="animated fadeIn faster" [routerLink]="['/unit', unit.id]">
+					<ion-item button *ngFor="let unit of units | filterBy: ['name']: name" class="animated fadeIn fast" [routerLink]="['/unit', unit.id]">
 						<ion-avatar slot="start">
 							<img src="assets/icon/unit/{{unit.name}}.png">
 						</ion-avatar>
