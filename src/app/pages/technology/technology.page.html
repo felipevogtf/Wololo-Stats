@@ -22,11 +22,13 @@
 
 <ion-content>
 
+	
+
 	<ion-grid>
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-item button *ngFor="let technology of technologies | async | filterBy: ['name']: name" [routerLink]="['/menu/technology', technology.id]">
+					<ion-item button *ngFor="let technology of technologies  | filterBy: ['name']: name" class="animated fadeIn faster" [routerLink]="['/menu/technology', technology.id]">
 						<ion-avatar slot="start">
 							<img src="assets/icon/technology/{{technology.name}}.jpg">
 						</ion-avatar>
@@ -34,8 +36,22 @@
 							<h2>{{ technology.name }}</h2>
 						</ion-label>
 					</ion-item>
+
+					<div *ngIf="!technologies.length > 0">
+						<ion-item *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">
+							<ion-avatar slot="start">
+								<ion-skeleton-text animated></ion-skeleton-text>
+							</ion-avatar>
+							<ion-label>
+								<h2>
+									<ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+								</h2>
+							</ion-label>
+						</ion-item>
+					</div>
 				</ion-list>
 			</ion-col>
 		</ion-row>
 	</ion-grid>
+
 </ion-content>

@@ -30,9 +30,9 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 		]),
 	],
 })
-export class UnitPage implements OnInit {
+export class UnitPage {
 
-	units: Promise<any[]>;
+	units = [];
 	isOpen = true;
 	name = "";
 
@@ -40,10 +40,12 @@ export class UnitPage implements OnInit {
 	
 	constructor(private db: DatabaseService) { }
 
-	ngOnInit() {
+	ionViewDidEnter() {
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
-				this.units = this.db.loadUnits();
+				this.db.loadUnits().then(data => {
+					this.units = this.units.concat(data);
+				});
 			}
 		});
 	}

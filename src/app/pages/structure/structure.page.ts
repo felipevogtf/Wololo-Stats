@@ -30,9 +30,9 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 		]),
 	],
 })
-export class StructurePage implements OnInit {
+export class StructurePage {
 
-	structures: Promise<any[]>;
+	structures = [];
 	isOpen = true;
 	name = "";
 
@@ -40,11 +40,13 @@ export class StructurePage implements OnInit {
 
 	constructor(private db: DatabaseService) { }
 
-	ngOnInit() {
+	ionViewDidEnter() {
 		
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
-				this.structures = this.db.loadStructures();
+				this.db.loadStructures().then(data => {
+					this.structures = this.structures.concat(data);
+				});
 			}
 		});
 	}
