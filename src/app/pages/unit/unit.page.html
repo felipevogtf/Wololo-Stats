@@ -52,7 +52,7 @@
 		</ion-row>
 	</ion-grid>
 
-	<ion-infinite-scroll (ionInfinite)="loadData($event)" *ngIf="size > 0">
+	<ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" *ngIf="size > 0">
 		<ion-infinite-scroll-content
 		loadingSpinner="bubbles"
 		loadingText="Cargando mas unidades...">

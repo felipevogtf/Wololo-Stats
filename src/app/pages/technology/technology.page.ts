@@ -54,7 +54,7 @@ export class TechnologyPage {
 
 	onSearch(event){
 		this.name = event.target.value;
-		this.size = this.technologies.length/3;
+		this.size = 0;
 	}
 	openSearch(){
 		this.isOpen = false;

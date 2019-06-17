@@ -54,7 +54,7 @@ export class UnitPage {
 
 	onSearch(event){
 		this.name = event.target.value;
-		this.size = this.units.length/2;
+		this.size = 0;
 	}
 	openSearch(){
 		this.isOpen = false;
