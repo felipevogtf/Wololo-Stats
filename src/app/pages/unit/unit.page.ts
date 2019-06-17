@@ -34,6 +34,7 @@ export class UnitPage {
 
 	units = [];
 	isOpen = true;
+	size = 0;
 	name = "";
 
 	@ViewChild (IonSearchbar) public searchbar: IonSearchbar;
@@ -45,6 +46,7 @@ export class UnitPage {
 			if (rdy) {
 				this.db.loadUnits().then(data => {
 					this.units = this.units.concat(data);
+					this.size = this.units.length - 15;
 				});
 			}
 		});
@@ -52,6 +54,7 @@ export class UnitPage {
 
 	onSearch(event){
 		this.name = event.target.value;
+		this.size = this.units.length/2;
 	}
 	openSearch(){
 		this.isOpen = false;
@@ -61,4 +64,13 @@ export class UnitPage {
 		this.isOpen = true;
 	}
 
+	loadData(event){
+		setTimeout(() => {
+			console.log('Done');
+			event.target.complete();
+			if (this.size > 0) {
+				this.size -= 15;
+			}
+		}, 500);
+	}
 }

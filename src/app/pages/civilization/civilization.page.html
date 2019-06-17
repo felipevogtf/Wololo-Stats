@@ -25,7 +25,7 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-item button *ngFor="let civilization of civilizations | filterBy: ['name']: name" class="animated fadeIn fast" [routerLink]="['/menu/civilization', civilization.id]">
+					<ion-item button *ngFor="let civilization of ( civilizations | initial: size ) | filterBy: ['name']: name" class="animated fadeIn fast" [routerLink]="['/menu/civilization', civilization.id]">
 						<ion-avatar slot="start">
 							<img src="assets/icon/civilization/{{civilization.name}}.jpg">
 						</ion-avatar>
@@ -54,5 +54,10 @@
 			</ion-col>
 		</ion-row>
 	</ion-grid>
-
+	<ion-infinite-scroll (ionInfinite)="loadData($event)" *ngIf="size > 0">
+		<ion-infinite-scroll-content
+		loadingSpinner="bubbles"
+		loadingText="Cargando mas civilizaciones...">
+	</ion-infinite-scroll-content>
+</ion-infinite-scroll>
 </ion-content>

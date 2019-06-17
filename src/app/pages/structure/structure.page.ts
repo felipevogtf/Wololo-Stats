@@ -33,6 +33,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 export class StructurePage {
 
 	structures = [];
+	size = 0;
 	isOpen = true;
 	name = "";
 
@@ -46,6 +47,7 @@ export class StructurePage {
 			if (rdy) {
 				this.db.loadStructures().then(data => {
 					this.structures = this.structures.concat(data);
+					this.size = this.structures.length - 15;
 				});
 			}
 		});
@@ -53,6 +55,7 @@ export class StructurePage {
 
 	onSearch(event){
 		this.name = event.target.value;
+		this.size = 0;
 	}
 	openSearch(){
 		this.isOpen = false;
@@ -60,6 +63,16 @@ export class StructurePage {
 	}
 	closeSearch(){
 		this.isOpen = true;
+	}
+
+	loadData(event){
+		setTimeout(() => {
+			console.log('Done');
+			event.target.complete();
+			if (this.size > 0) {
+				this.size -= 15;
+			}
+		}, 500);
 	}
 
 }

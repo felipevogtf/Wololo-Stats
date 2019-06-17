@@ -54,7 +54,7 @@ export class TechnologyPage {
 
 	onSearch(event){
 		this.name = event.target.value;
-		this.size = 0;
+		this.size = this.technologies.length/3;
 	}
 	openSearch(){
 		this.isOpen = false;
@@ -68,7 +68,7 @@ export class TechnologyPage {
 		setTimeout(() => {
 			console.log('Done');
 			event.target.complete();
-			if (this.size > 0 && this.name.length === 0) {
+			if (this.size > 0) {
 				this.size -= 15;
 			}
 		}, 500);
