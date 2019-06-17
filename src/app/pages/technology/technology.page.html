@@ -1,10 +1,23 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-buttons slot="start">
+		<ion-buttons slot="start" [@openClose]="isOpen ? 'open' : 'closed'">
 			<ion-menu-button></ion-menu-button>
 		</ion-buttons>
-		<ion-title>technology</ion-title>
-	</ion-toolbar>
+		<ion-title [@openClose]="isOpen ? 'open' : 'closed'">Tecnologias</ion-title>
+		<ion-searchbar 
+		[@openClose]="!isOpen ? 'open' : 'closed'"
+		placeholder="Buscar Tecnologias..." 
+		showCancelButton debounce="500" 
+		(ionInput)="onSearch($event)" 
+		(ionCancel)="closeSearch()"
+		animated >
+	</ion-searchbar>
+	<ion-buttons slot="end" [@openClose]="isOpen ? 'open' : 'closed'">
+		<ion-button icon-only size="large" (click)="openSearch()">
+			<ion-icon name="search"></ion-icon>
+		</ion-button>
+	</ion-buttons>
+</ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -13,9 +26,12 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-item button *ngFor="let technology of technologies | async" [routerLink]="['/technology', technology.id]">
+					<ion-item button *ngFor="let technology of technologies | async | filterBy: ['name']: name" [routerLink]="['/menu/technology', technology.id]">
+						<ion-avatar slot="start">
+							<img src="assets/icon/technology/{{technology.name}}.jpg">
+						</ion-avatar>
 						<ion-label>
-							<h1>{{ technology.id }} {{ technology.name }}</h1>
+							<h2>{{ technology.name }}</h2>
 						</ion-label>
 					</ion-item>
 				</ion-list>
