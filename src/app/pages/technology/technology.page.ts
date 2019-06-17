@@ -30,9 +30,9 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 		]),
 	],
 })
-export class TechnologyPage implements OnInit {
+export class TechnologyPage {
 
-	technologies: Promise<any[]>;
+	technologies = [];
 
 	isOpen = true;
 	name = "";
@@ -41,10 +41,12 @@ export class TechnologyPage implements OnInit {
 
 	constructor(private db: DatabaseService) { }
 
-	ngOnInit() {
+	ionViewDidEnter() {
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
-				this.technologies = this.db.loadTechnologies();
+				this.db.loadTechnologies().then(data => {
+					this.technologies = this.technologies.concat(data);
+				});
 			}
 		});
 	}

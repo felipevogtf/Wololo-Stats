@@ -31,7 +31,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 		]),
 	],
 })
-export class CivilizationPage implements OnInit {
+export class CivilizationPage {
 
 	civilizations = [];
 	isOpen = true;
@@ -43,7 +43,7 @@ export class CivilizationPage implements OnInit {
 
 
 
-	ngOnInit() {
+	ionViewDidEnter() {
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
 				this.db.loadCivilizations().then(data => {
