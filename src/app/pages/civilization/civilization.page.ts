@@ -35,7 +35,6 @@ export class CivilizationPage {
 
 	civilizations = [];
 	isOpen = true;
-	size = 0;
 	name = "";
 	
 	@ViewChild (IonSearchbar) public searchbar: IonSearchbar;
@@ -44,12 +43,11 @@ export class CivilizationPage {
 
 
 
-	ionViewDidEnter() {
+	ngOnInit() {
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
 				this.db.loadCivilizations().then(data => {
 					this.civilizations = this.civilizations.concat(data);
-					this.size = this.civilizations.length - 15;
 				});
 			}
 		});
@@ -57,7 +55,6 @@ export class CivilizationPage {
 
 	onSearch(event){
 		this.name = event.target.value;
-		this.size = 0;
 	}
 	openSearch(){
 		this.isOpen = false;
@@ -66,15 +63,4 @@ export class CivilizationPage {
 	closeSearch(){
 		this.isOpen = true;
 	}
-
-	loadData(event){
-		setTimeout(() => {
-			console.log('Done');
-			event.target.complete();
-			if (this.size > 0) {
-				this.size -= 15;
-			}
-		}, 500);
-	}
-
 }
