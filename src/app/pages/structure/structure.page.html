@@ -26,14 +26,16 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-item button *ngFor="let structure of structures | filterBy: ['name']: name" class="animated fadeIn fast" [routerLink]="['/menu/structure', structure.id]"> 
-						<ion-avatar slot="start">
-							<img src="assets/icon/structure/{{structure.name}}.png">
-						</ion-avatar>
-						<ion-label>
-							<h2>{{ structure.name }}</h2>
-						</ion-label>
-					</ion-item>
+					<ion-virtual-scroll [items]="structures | filterBy: ['name']: name" approxItemHeight="60px">
+						<ion-item button *virtualItem="let structure" [routerLink]="['/menu/structure', structure.id]" class="animated fadeIn faster">
+							<ion-avatar slot="start">
+								<ion-img src="assets/icon/structure/{{structure.name}}.png"></ion-img>
+							</ion-avatar>
+							<ion-label>
+								<h2>{{ structure.name }}</h2>
+							</ion-label>
+						</ion-item>
+					</ion-virtual-scroll>
 
 					<div *ngIf="!structures.length > 0">
 						<ion-item *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">

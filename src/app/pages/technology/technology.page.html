@@ -28,14 +28,16 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-item button *ngFor="let technology of ( technologies | initial: size ) | filterBy: ['name']: name" class="animated fadeIn fast" [routerLink]="['/menu/technology', technology.id]">
-						<ion-avatar slot="start">
-							<img src="assets/icon/technology/{{technology.name}}.jpg">
-						</ion-avatar>
-						<ion-label>
-							<h2>{{ technology.name }}</h2>
-						</ion-label>
-					</ion-item>
+					<ion-virtual-scroll [items]="technologies | filterBy: ['name']: name" approxItemHeight="60px">
+						<ion-item button *virtualItem="let technology" [routerLink]="['/menu/technology', technology.id]" class="animated fadeIn faster">
+							<ion-avatar slot="start">
+								<ion-img src="assets/icon/technology/{{technology.name}}.jpg"></ion-img>
+							</ion-avatar>
+							<ion-label>
+								<h2>{{ technology.name }}</h2>
+							</ion-label>
+						</ion-item>
+					</ion-virtual-scroll>
 
 					<div *ngIf="!technologies.length > 0">
 						<ion-item *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">
@@ -53,11 +55,4 @@
 			</ion-col>
 		</ion-row>
 	</ion-grid>
-
-	<ion-infinite-scroll (ionInfinite)="loadData($event)" *ngIf="size > 0">
-		<ion-infinite-scroll-content
-		loadingSpinner="bubbles"
-		loadingText="Cargando mas tecnologias...">
-	</ion-infinite-scroll-content>
-</ion-infinite-scroll>
 </ion-content>

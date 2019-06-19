@@ -40,8 +40,7 @@ export class StructurePage {
 
 	constructor(private db: DatabaseService) { }
 
-	ionViewDidEnter() {
-		
+	ngOnInit() {
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
 				this.db.loadStructures().then(data => {
@@ -61,5 +60,4 @@ export class StructurePage {
 	closeSearch(){
 		this.isOpen = true;
 	}
-
 }

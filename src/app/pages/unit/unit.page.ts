@@ -40,7 +40,7 @@ export class UnitPage {
 	
 	constructor(private db: DatabaseService) { }
 
-	ionViewDidEnter() {
+	ngOnInit() {
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
 				this.db.loadUnits().then(data => {
@@ -60,5 +60,4 @@ export class UnitPage {
 	closeSearch(){
 		this.isOpen = true;
 	}
-
 }

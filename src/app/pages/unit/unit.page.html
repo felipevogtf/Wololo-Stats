@@ -26,14 +26,16 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-item button *ngFor="let unit of units | filterBy: ['name']: name" class="animated fadeIn fast" [routerLink]="['/unit', unit.id]">
-						<ion-avatar slot="start">
-							<img src="assets/icon/unit/{{unit.name}}.png">
-						</ion-avatar>
-						<ion-label >
-							<h2>{{ unit.name }}</h2>
-						</ion-label>
-					</ion-item>
+					<ion-virtual-scroll [items]="units | filterBy: ['name']: name" approxItemHeight="60px">
+						<ion-item button *virtualItem="let unit" [routerLink]="['/menu/unit', unit.id]" class="animated fadeIn faster">
+							<ion-avatar slot="start">
+								<ion-img src="assets/icon/unit/{{unit.name}}.png"></ion-img>
+							</ion-avatar>
+							<ion-label >
+								<h2>{{ unit.name }}</h2>
+							</ion-label>
+						</ion-item>
+					</ion-virtual-scroll>
 
 					<div *ngIf="!units.length > 0">
 						<ion-item *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">

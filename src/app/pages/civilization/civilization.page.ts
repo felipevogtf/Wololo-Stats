@@ -43,7 +43,7 @@ export class CivilizationPage {
 
 
 
-	ionViewDidEnter() {
+	ngOnInit() {
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
 				this.db.loadCivilizations().then(data => {
@@ -63,5 +63,4 @@ export class CivilizationPage {
 	closeSearch(){
 		this.isOpen = true;
 	}
-
 }

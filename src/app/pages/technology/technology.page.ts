@@ -33,7 +33,6 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 export class TechnologyPage {
 
 	technologies = [];
-	size = 0;
 	isOpen = true;
 	name = "";
 
@@ -41,12 +40,11 @@ export class TechnologyPage {
 
 	constructor(private db: DatabaseService) { }
 
-	ionViewDidEnter() {
+	ngOnInit() {
 		this.db.getDatabaseState().subscribe(rdy => {
 			if (rdy) {
 				this.db.loadTechnologies().then(data => {
 					this.technologies = this.technologies.concat(data);
-					this.size = this.technologies.length - 15;
 				});
 			}
 		});
@@ -54,7 +52,6 @@ export class TechnologyPage {
 
 	onSearch(event){
 		this.name = event.target.value;
-		this.size = 0;
 	}
 	openSearch(){
 		this.isOpen = false;
@@ -62,15 +59,5 @@ export class TechnologyPage {
 	}
 	closeSearch(){
 		this.isOpen = true;
-	}
-
-	loadData(event){
-		setTimeout(() => {
-			console.log('Done');
-			event.target.complete();
-			if (this.size > 0 && this.name.length === 0) {
-				this.size -= 15;
-			}
-		}, 500);
 	}
 }
