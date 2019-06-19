@@ -26,8 +26,8 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-virtual-scroll [items]="units | filterBy: ['name']: name" [approxItemHeight]="55">
-						<ion-item button *virtualItem="let unit" class="animated fadeIn fast" [routerLink]="['/menu/unit', unit.id]">
+					<ion-virtual-scroll [items]="units | filterBy: ['name']: name" approxItemHeight="60px">
+						<ion-item button *virtualItem="let unit" [routerLink]="['/menu/unit', unit.id]" class="animated fadeIn faster">
 							<ion-avatar slot="start">
 								<ion-img src="assets/icon/unit/{{unit.name}}.png"></ion-img>
 							</ion-avatar>

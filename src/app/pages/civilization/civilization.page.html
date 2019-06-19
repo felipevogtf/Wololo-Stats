@@ -25,8 +25,8 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-virtual-scroll [items]="civilizations | filterBy: ['name']: name" [approxItemHeight]="55">
-						<ion-item button *virtualItem="let civilization" class="animated fadeIn fast" [routerLink]="['/menu/civilization', civilization.id]">
+					<ion-virtual-scroll [items]="civilizations | filterBy: ['name']: name" approxItemHeight="70px">
+						<ion-item button *virtualItem="let civilization" [routerLink]="['/menu/civilization', civilization.id]" class="animated fadeIn faster">
 							<ion-avatar slot="start">
 								<ion-img src="assets/icon/civilization/{{civilization.name}}.jpg"></ion-img>
 							</ion-avatar>

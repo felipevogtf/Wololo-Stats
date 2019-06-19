@@ -28,8 +28,8 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-virtual-scroll [items]="technologies | filterBy: ['name']: name" [approxItemHeight]="55">
-						<ion-item button *virtualItem="let technology" class="animated fadeIn fast" [routerLink]="['/menu/technology', technology.id]">
+					<ion-virtual-scroll [items]="technologies | filterBy: ['name']: name" approxItemHeight="60px">
+						<ion-item button *virtualItem="let technology" [routerLink]="['/menu/technology', technology.id]" class="animated fadeIn faster">
 							<ion-avatar slot="start">
 								<ion-img src="assets/icon/technology/{{technology.name}}.jpg"></ion-img>
 							</ion-avatar>

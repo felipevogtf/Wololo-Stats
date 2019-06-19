@@ -26,8 +26,8 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-virtual-scroll [items]="structures | filterBy: ['name']: name" [approxItemHeight]="55">
-						<ion-item button *virtualItem="let structure" class="animated fadeIn fast" [routerLink]="['/menu/structure', structure.id]">
+					<ion-virtual-scroll [items]="structures | filterBy: ['name']: name" approxItemHeight="60px">
+						<ion-item button *virtualItem="let structure" [routerLink]="['/menu/structure', structure.id]" class="animated fadeIn faster">
 							<ion-avatar slot="start">
 								<ion-img src="assets/icon/structure/{{structure.name}}.png"></ion-img>
 							</ion-avatar>
