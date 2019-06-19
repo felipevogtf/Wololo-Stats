@@ -2,11 +2,17 @@ ion-searchbar{
 	padding-bottom: 0;
 	padding-top: 0;
 }
+.ios ion-searchbar{
+	--cancel-button-color: #F2F2F2;
+	--background: #F2F2F2;
+}
 ion-toolbar{
 	--background: #FF641A;
-	--color: #F2F2F2;
-}
-ion-item{
-	height: 55px;
-	margin-bottom: 5px;
+	--color: #F2F2F2 ;
+	ion-menu-button{
+		--color: #F2F2F2;
+	}
+	ion-icon{
+		color: #F2F2F2;
+	}
 }

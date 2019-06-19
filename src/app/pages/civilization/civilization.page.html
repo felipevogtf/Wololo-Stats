@@ -5,6 +5,7 @@
 		</ion-buttons>
 		<ion-title [@openClose]="isOpen ? 'open' : 'closed'">Civilizaciones</ion-title>
 		<ion-searchbar 
+		class="ios"
 		[@openClose]="!isOpen ? 'open' : 'closed'"
 		placeholder="Buscar Civilización..." 
 		showCancelButton debounce="500" 
@@ -25,7 +26,7 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-virtual-scroll [items]="civilizations | filterBy: ['name']: name" approxItemHeight="70px">
+					<ion-virtual-scroll [items]="civilizations | filterBy: ['name']: name" approxItemHeight="67px">
 						<ion-item button *virtualItem="let civilization" [routerLink]="['/menu/civilization', civilization.id]" class="animated fadeIn faster">
 							<ion-avatar slot="start">
 								<ion-img src="assets/icon/civilization/{{civilization.name}}.jpg"></ion-img>
