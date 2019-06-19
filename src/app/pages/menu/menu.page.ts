@@ -11,27 +11,33 @@ export class MenuPage implements OnInit {
 	pages = [
 	{
 		tittle: 'Home',
-		url: '/menu/home'
+		url: '/menu/home',
+		direction: 'root'
 	},
 	{
 		tittle: 'Civilization',
-		url: '/menu/civilization'
+		url: '/menu/civilization',
+		direction: 'forward'
 	},
 	{
 		tittle: 'Unit',
-		url: '/menu/unit'
+		url: '/menu/unit',
+		direction: 'forward'
 	},
 	{
 		tittle: 'Structure',
-		url: '/menu/structure'
+		url: '/menu/structure',
+		direction: 'forward'
 	},
 	{
 		tittle: 'Technology',
-		url: '/menu/technology'
+		url: '/menu/technology',
+		direction: 'forward'
 	},
 	{
 		tittle: 'Compare',
-		url: '/menu/compare'
+		url: '/menu/compare',
+		direction: 'forward'
 	},
 	];
 
