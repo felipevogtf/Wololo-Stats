@@ -46,4 +46,38 @@
 			<p *ngFor="let bonus of civilization.bonus">{{ bonus }}</p>
 		</ion-card-content>
 	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>Unidades</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-item button *ngFor="let unit of units" [routerLink]="['/menu/unit', unit.id]" lines="none" detail="true">
+				<ion-avatar slot="start">
+					<ion-img src="assets/icon/unit/{{unit.name}}.png"></ion-img>
+				</ion-avatar>
+				<ion-label>
+					<h2>{{ unit.name }}</h2>
+				</ion-label>
+			</ion-item>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>Tecnologias</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-item button *ngFor="let technology of technologies" [routerLink]="['/menu/technology', technology.id]" lines="none" detail="true">
+				<ion-avatar slot="start">
+					<ion-img src="assets/icon/technology/{{technology.name}}.jpg"></ion-img>
+				</ion-avatar>
+				<ion-label>
+					<h2>{{ technology.name }}</h2>
+				</ion-label>
+			</ion-item>
+		</ion-card-content>
+	</ion-card>
 </ion-content>

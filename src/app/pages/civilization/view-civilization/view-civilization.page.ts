@@ -8,9 +8,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 	templateUrl: './view-civilization.page.html',
 	styleUrls: ['./view-civilization.page.scss'],
 })
-export class ViewCivilizationPage implements OnInit {
+export class ViewCivilizationPage{
 
 	civilization = null;
+	units = new Array();
+	technologies = new Array();
 
 	constructor(private route: ActivatedRoute, private db: DatabaseService) { }
 
@@ -21,6 +23,13 @@ export class ViewCivilizationPage implements OnInit {
 			this.db.getCivilization(id).then(data => {
 				this.civilization = data;
 			});
-		});	}
-
+			this.db.getUnicUnitsCivilization(id).then(data => {
+				this.units = data;
+			});
+			this.db.getUnicTechnologiesCivilization(id).then(data => {
+				this.technologies = data;
+			});
+		});	
 	}
+
+}

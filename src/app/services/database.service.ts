@@ -18,7 +18,7 @@ export class DatabaseService {
 
 		this.plt.ready().then(() => {
 			this.sqlite.create({
-				name: 'ageofempire2.db',
+				name: 'ageofempire2def.db',
 				location: 'default'
 			})
 			.then((db: SQLiteObject) => {
@@ -200,5 +200,33 @@ export class DatabaseService {
 		});
 	}
 
+	public getUnicUnitsCivilization(id) {
+		return this.database.executeSql('SELECT id_unit, name, civilization FROM unit WHERE civilization = ?', [id]).then(data => {
+			let units = [];
+			if (data.rows.length > 0) {
+				for (var i = 0; i < data.rows.length; i++) {
+					units.push({ 
+						id: data.rows.item(i).id_unit,
+						name: data.rows.item(i).name
+					});
+				}
+			}
+			return units;
+		});
+	}
 
+	public getUnicTechnologiesCivilization(id) {
+		return this.database.executeSql('SELECT id_technology, name, civilization FROM technology WHERE civilization = ?', [id]).then(data => {
+			let technologies = [];
+			if (data.rows.length > 0) {
+				for (var i = 0; i < data.rows.length; i++) {
+					technologies.push({ 
+						id: data.rows.item(i).id_technology,
+						name: data.rows.item(i).name
+					});
+				}
+			}
+			return technologies;
+		});
+	}
 }
