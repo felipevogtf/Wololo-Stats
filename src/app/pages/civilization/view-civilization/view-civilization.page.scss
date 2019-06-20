@@ -1,0 +1,40 @@
+ion-toolbar{
+	--background: #FF641A;
+	--color: #F2F2F2 ;
+	ion-menu-button{
+		--color: #F2F2F2;
+	}
+	ion-icon{
+		color: #F2F2F2;
+	}
+}
+ion-item{
+	--background: white;
+	--padding-start: 0;
+}
+.ios ion-back-button{
+	--color: #F2F2F2;
+}
+
+ion-grid{
+	padding-left: 12px !important;
+	p{
+		font-size: 12px;
+	}
+}
+
+ion-content{
+	--ion-background-color: var(--ion-color-light-tint);
+}
+ion-card{
+	background-color: white;
+	box-shadow: none;
+	border-radius: 15px;
+	img{
+		display: block;
+		margin: auto;
+		border-radius: 15px !important;
+		max-height: 185px;
+		width: auto;
+	}
+}

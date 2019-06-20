@@ -1,14 +1,49 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-title>viewcilization</ion-title>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="menu/civilization"></ion-back-button>
+		</ion-buttons>
+		<ion-title>{{ civilization.name }}</ion-title>
 	</ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-	<ion-button [routerLink]="['/menu/civilization']">home</ion-button>
-	<h1>{{ civilization.id }} {{ civilization.name }}</h1>
-	<h3>{{ civilization.expansion }}</h3>
-	<h3>{{ civilization.characteristic }}</h3>
-	<h3>{{ civilization.teamBonus }}</h3>
-	<h3 *ngFor="let item of civilization.bonus" text-wrap>{{ item }}</h3>
+<ion-content>
+	<ion-card>
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<ion-item lines="full">
+						<ion-label>Expanción</ion-label>
+					</ion-item>
+					<p>{{ civilization.expansion }}</p>
+					<ion-item lines="full">
+						<ion-label>Descripción</ion-label>
+					</ion-item>
+					<p>{{ civilization.characteristic }}</p>
+				</ion-col>
+				<ion-col>
+					<img src="assets/img/civilization/{{civilization.name}}.png">
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>Bonus de equipo</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<p>{{ civilization.teamBonus }}</p>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>Bonus de civilización</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<p *ngFor="let bonus of civilization.bonus">{{ bonus }}</p>
+		</ion-card-content>
+	</ion-card>
 </ion-content>
