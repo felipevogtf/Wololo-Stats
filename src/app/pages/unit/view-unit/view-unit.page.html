@@ -1,33 +1,234 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-title>viewunit</ion-title>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="menu/unit"></ion-back-button>
+		</ion-buttons>
+		<ion-title>{{ unit.name }}</ion-title>
 	</ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-	<ion-button [routerLink]="['/menu/unit']">home</ion-button>
-	<h1>{{ unit.id }} {{ unit.name }}</h1>
-	<h3>{{ unit.expansion }}</h3>
-	<h3>{{ unit.buildTime }}</h3>
-	<h3>{{ unit.hitPoints }}</h3>
-	<h3>{{ unit.frameDelay }}</h3>
-	<h3>{{ unit.rateOfFire }}</h3>
-	<h3>{{ unit.range }}</h3>
-	<h3>{{ unit.accuracy }}</h3>
-	<h3>{{ unit.projectileSpeed }}</h3>
-	<h3>{{ unit.meleeArmor }}</h3>
-	<h3>{{ unit.pierceArmor }}</h3>
-	<h3>{{ unit.speed }}</h3>
-	<h3>{{ unit.lineOfSight }}</h3>
-	<h3>{{ unit.garrison }}</h3>
-	<h3>{{ unit.blastRadius }}</h3>
-	<h3>{{ unit.wood }}</h3>
-	<h3>{{ unit.gold }}</h3>
-	<h3>{{ unit.stone }}</h3>
-	<h3>{{ unit.food }}</h3>
-	<h3>{{ unit.attack }}</h3>
-	<h3>{{ unit.createdIn }}</h3>
-	<h3>{{ unit.civilization }}</h3>
-	<h3>{{ unit.age }}</h3>
-	<h3 *ngFor="let item of unit.attackBonus" text-wrap>{{ item }}</h3>
+<ion-content>
+	<ion-card class="unit-detail">
+		<img src="assets/img/unit/test.png">
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<ion-item lines="full">
+						<ion-label>Expanción</ion-label>
+					</ion-item>
+					<p>{{ unit.expansion }}</p>
+					<ion-item lines="full">
+						<ion-label>Edad</ion-label>
+					</ion-item>
+					<p>{{ unit.age }}</p>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>Desarrollo</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-card-subtitle *ngIf="unit.civilizationName">Civilizacón</ion-card-subtitle>
+			<ion-item button lines="none" detail="true" *ngIf="unit.civilizationName" [routerLink]="['/menu/civilization', unit.civilization]">
+				<ion-avatar slot="start">
+					<ion-img src="assets/icon/civilization/{{unit.civilizationName}}.jpg"></ion-img>
+				</ion-avatar>
+				<ion-label>
+					<h2>{{ unit.civilizationName }}</h2>
+				</ion-label>
+			</ion-item>
+			<ion-card-subtitle>Creado en</ion-card-subtitle>
+			<ion-item button lines="none" detail="true" [routerLink]="['/menu/structure', unit.createdIn]">
+				<ion-avatar slot="start">
+					<ion-img src="assets/icon/structure/{{unit.createdInName}}.png"></ion-img>
+				</ion-avatar>
+				<ion-label>
+					<h2>{{ unit.createdInName }}</h2>
+				</ion-label>
+			</ion-item>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>Costo producción</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-grid class="cost">
+				<ion-row>
+					<ion-col size="4">
+						<img src="assets/icon/home/wood.svg">
+						<h2>{{ unit.wood }}</h2>
+					</ion-col>
+					<ion-col size="4">
+						<img src="assets/icon/home/stone.svg">
+						<h2>{{ unit.stone }}</h2>
+					</ion-col>
+					<ion-col size="4">
+						<img src="assets/icon/home/gold.svg">
+						<h2>{{ unit.gold }}</h2>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="6">
+						<img src="assets/icon/home/meat.svg">
+						<h2>{{ unit.food }}</h2>
+					</ion-col>
+					<ion-col size="6">
+						<img src="assets/icon/home/clock.svg">
+						<h2>{{ unit.buildTime }} s</h2>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-card-content>
+	</ion-card>
+
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>Estadisticas</ion-card-title>
+		</ion-card-header>
+		<ion-grid class="unit-stats">
+			<ion-row>
+				<ion-col>
+					<ion-row>
+						<ion-col size="6">
+							<p>Vida:</p>
+						</ion-col>
+						<ion-col size="6">
+							<p *ngIf="unit.hitPoints">{{ unit.hitPoints }}</p>
+							<p *ngIf="!unit.hitPoints">-</p>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="6">
+							<p>Ataque:</p>
+						</ion-col>
+						<ion-col size="6">
+							<p *ngIf="unit.attack">{{ unit.attack }}</p>
+							<p *ngIf="!unit.attack">-</p>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="6">
+							<p>Armadura:</p>
+						</ion-col>
+						<ion-col size="6">
+							<p *ngIf="unit.meleeArmor">{{ unit.meleeArmor }}</p>
+							<p *ngIf="!unit.meleeArmor">-</p>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="6">
+							<p>Arm.ant.proy.:</p>
+						</ion-col>
+						<ion-col size="6">
+							<p *ngIf="unit.pierceArmor">{{ unit.pierceArmor }}</p>
+							<p *ngIf="!unit.pierceArmor">-</p>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="6">
+							<p>Velocidad:</p>
+						</ion-col>
+						<ion-col size="6">
+							<p *ngIf="unit.speed">{{ unit.speed }}</p>
+							<p *ngIf="!unit.speed">-</p>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="6">
+							<p>Vision:</p>
+						</ion-col>
+						<ion-col size="6">
+							<p *ngIf="unit.lineOfSight">{{ unit.lineOfSight }}</p>
+							<p *ngIf="!unit.lineOfSight">-</p>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="6">
+							<p>Cadencia:</p>
+						</ion-col>
+						<ion-col size="6">
+							<p *ngIf="unit.rateOfFire">{{ unit.rateOfFire }}</p>
+							<p *ngIf="!unit.rateOfFire">-</p>
+						</ion-col>
+					</ion-row>
+				</ion-col>
+
+				<ion-col>
+					<ion-row>
+						<ion-col size="6">
+							<p>Frame Delay:</p>
+						</ion-col>
+						<ion-col size="6">
+							<p *ngIf="unit.frameDelay">{{ unit.frameDelay }}</p>
+							<p *ngIf="!unit.frameDelay">-</p>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="6">
+							<p>Rango:</p>
+						</ion-col>
+						<ion-col size="6">
+							<p *ngIf="unit.range">{{ unit.range }}</p>
+							<p *ngIf="!unit.range">-</p>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="6">
+							<p>Precisión:</p>
+						</ion-col>
+						<ion-col size="6">
+							<p *ngIf="unit.accuracy">{{ unit.accuracy }}</p>
+							<p *ngIf="!unit.accuracy">-</p>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="6">
+							<p>Vel. Proyectil:</p>
+						</ion-col>
+						<ion-col size="6">
+							<p *ngIf="unit.projectileSpeed">{{ unit.projectileSpeed }}</p>
+							<p *ngIf="!unit.projectileSpeed">-</p>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="6">
+							<p>Guarnicón:</p>
+						</ion-col>
+						<ion-col size="6">
+							<p *ngIf="unit.garrison">{{ unit.garrison }}</p>
+							<p *ngIf="!unit.garrison">-</p>
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col size="6">
+							<p>Radio Explosión:</p>
+						</ion-col>
+						<ion-col size="6">
+							<p *ngIf="unit.blastRadius">{{ unit.blastRadius }}</p>
+							<p *ngIf="!unit.blastRadius">-</p>
+						</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>Bonus de ataque</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<p *ngFor="let bonus of unit.attackBonus">{{ bonus }}</p>
+		</ion-card-content>
+	</ion-card>
+
 </ion-content>
