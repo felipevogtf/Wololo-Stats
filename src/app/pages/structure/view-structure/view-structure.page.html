@@ -1,17 +1,174 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-title>viewStructure</ion-title>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="menu/structure"></ion-back-button>
+		</ion-buttons>
+		<ion-title>{{ structure.name }}</ion-title>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-	<ion-button [routerLink]="['/menu/structure']">home</ion-button>
-	<h1>{{ structure.id }} {{ structure.name }}</h1>
-	<h3>{{ structure.expansion }}</h3>
-	<h3>{{ structure.wood }}</h3>
-	<h3>{{ structure.stone }}</h3>
-	<h3>{{ structure.gold }}</h3>
-	<h3>{{ structure.buildTime }}</h3>
-	<h3>{{ structure.type }}</h3>
-	<h3>{{ structure.age }}</h3>
+	<ion-card class="data">
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<ion-item lines="full">
+						<ion-label>Expanción</ion-label>
+					</ion-item>
+					<p>{{ structure.expansion }}</p>
+					<ion-item lines="full">
+						<ion-label>Tipo</ion-label>
+					</ion-item>
+					<p>{{ structure.type }}</p>
+				</ion-col>
+				<ion-col class="structure">
+					<img src="assets/img/structure/{{structure.name}}.png">
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>
+					<ion-item lines="full" class="age">
+						<ion-label>Edad</ion-label>
+					</ion-item>
+					<p>{{ structure.age }}</p>
+
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>Costo producción</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-grid>
+				<ion-row class="cost">
+					<ion-col size="3">
+						<img src="assets/icon/home/wood.svg">
+						<h2>{{ structure.wood }}</h2>
+					</ion-col>
+					<ion-col size="3">
+						<img src="assets/icon/home/stone.svg">
+						<h2>{{ structure.stone }}</h2>
+					</ion-col>
+					<ion-col size="3">
+						<img src="assets/icon/home/gold.svg">
+						<h2>{{ structure.gold }}</h2>
+					</ion-col>
+					<ion-col size="3">
+						<img src="assets/icon/home/clock.svg">
+						<h2>{{ structure.buildTime }} s</h2>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-card-content>
+
+	</ion-card>
+
+
+
+
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>Estadisticas</ion-card-title>
+			<ion-grid class="age">
+				<ion-row>
+					<ion-col *ngFor="let stat of stats; let i = index">
+						<ion-item button (click)="goTo(i)" lines="none" [class.active-item]="activeSlide === i">
+							<img src="assets/icon/age/{{stat.name}}.png">
+						</ion-item>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-card-header>
+		<ion-slides pager="true" (ionSlideDidChange)="setActiveIndex($event)">
+			<ion-slide *ngFor="let stat of stats; let i = index">
+				<ion-grid class="age-stats">
+					<ion-row>
+						<ion-col>
+							<ion-row>
+								<ion-col size="6">
+									<p>Vida:</p>
+								</ion-col>
+								<ion-col size="6">
+									<p *ngIf="stat.hit_points">{{stat.hit_points}}</p>
+									<p *ngIf="!stat.hit_points">-</p>
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col size="6">
+									<p>Cadencia:</p>
+								</ion-col>
+								<ion-col size="6">
+									<p *ngIf="stat.rate_of_fire">{{stat.rate_of_fire}}</p>
+									<p *ngIf="!stat.rate_of_fire">-</p>
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col size="6">
+									<p>Rango:</p>
+								</ion-col>
+								<ion-col size="6">
+									<p *ngIf="stat.range">{{stat.range}}</p>
+									<p *ngIf="!stat.range">-</p>
+
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col size="6">
+									<p>Ataque:</p>
+								</ion-col>
+								<ion-col size="6">
+									<p *ngIf="stat.attack">{{stat.attack}}</p>
+									<p *ngIf="!stat.attack">-</p>
+								</ion-col>
+							</ion-row>
+						</ion-col>
+
+						<ion-col>
+							<ion-row>
+								<ion-col size="6">
+									<p>Armadura:</p>
+								</ion-col>
+								<ion-col size="6">
+									<p *ngIf="stat.melee_armor">{{stat.melee_armor}}</p>
+									<p *ngIf="!stat.melee_armor">-</p>
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col size="6">
+									<p>Arm.ant.proy:</p>
+								</ion-col>
+								<ion-col size="6">
+									<p *ngIf="stat.pierce_armor">{{stat.pierce_armor}}</p>
+									<p *ngIf="!stat.pierce_armor">-</p>
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col size="6">
+									<p>Campo visión:</p>
+								</ion-col>
+								<ion-col size="6">
+									<p *ngIf="stat.line_of_sight">{{stat.line_of_sight}}</p>
+									<p *ngIf="!stat.line_of_sight">-</p>
+								</ion-col>
+							</ion-row>
+							<ion-row>
+								<ion-col size="6">
+									<p>Guarnición:</p>
+								</ion-col>
+								<ion-col size="6">
+									<p *ngIf="stat.garrison">{{stat.garrison}}</p>
+									<p *ngIf="!stat.garrison">-</p>
+								</ion-col>
+							</ion-row>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-slide>
+		</ion-slides>
+	</ion-card>
 </ion-content>

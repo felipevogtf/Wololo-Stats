@@ -18,7 +18,7 @@ export class DatabaseService {
 
 		this.plt.ready().then(() => {
 			this.sqlite.create({
-				name: 'ageofempire2.db',
+				name: 'ageofempire2def.db',
 				location: 'default'
 			})
 			.then((db: SQLiteObject) => {
@@ -63,8 +63,9 @@ export class DatabaseService {
 		});
 	}
 
-	public getUnit(id) {
-		return this.database.executeSql('SELECT * FROM unit WHERE id_unit = ?', [id]).then(data => {
+	public getUnit(id) { 
+
+		return this.database.executeSql('SELECT unit.*, age.name as age_name, civilization.name as civilization_name, structure.name as name_structure FROM unit INNER JOIN age ON unit.age = age.id_age INNER JOIN structure ON unit.created_in = structure.id_structure LEFT JOIN civilization ON unit.civilization = civilization.id_civilization WHERE id_unit = ?', [id]).then(data => {
 			let attackBonus = [];
 			if (data.rows.item(0).attack_bonus != '') {
 				attackBonus = JSON.parse(data.rows.item(0).attack_bonus);
@@ -93,15 +94,17 @@ export class DatabaseService {
 				food: data.rows.item(0).food,
 				attack: data.rows.item(0).attack,
 				createdIn: data.rows.item(0).created_in,
+				createdInName: data.rows.item(0).name_structure,
 				civilization: data.rows.item(0).civilization,
-				age: data.rows.item(0).age,
+				civilizationName: data.rows.item(0).civilization_name,
+				age: data.rows.item(0).age_name,
 				attackBonus: attackBonus
 			}
 		});
 	}
 
 	public getStructure(id) {
-		return this.database.executeSql('SELECT * FROM structure WHERE id_structure = ?', [id]).then(data => {
+		return this.database.executeSql('SELECT structure.*, age.name as name_age, structure_type.name as type_name FROM structure INNER JOIN age ON structure.age = age.id_age INNER JOIN structure_type ON structure.type = structure_type.id_structure_type WHERE id_structure = ?', [id]).then(data => {
 			return {
 				id: data.rows.item(0).id_structure,
 				name: data.rows.item(0).name,
@@ -110,14 +113,14 @@ export class DatabaseService {
 				stone: data.rows.item(0).stone,
 				gold: data.rows.item(0).gold,
 				buildTime: data.rows.item(0).build_time,
-				type: data.rows.item(0).type,
-				age: data.rows.item(0).age
+				type: data.rows.item(0).type_name,
+				age: data.rows.item(0).name_age
 			}
 		});
 	}
 
 	public getTechnology(id) {
-		return this.database.executeSql('SELECT * FROM technology WHERE id_technology = ?', [id]).then(data => {
+		return this.database.executeSql('SELECT technology.*, age.name as name_age, civilization.name as civilization_name, structure.name as name_structure FROM technology INNER JOIN age ON technology.age = age.id_age INNER JOIN structure ON technology.develops_in = structure.id_structure LEFT JOIN civilization ON technology.civilization = civilization.id_civilization WHERE id_technology = ?', [id]).then(data => {
 			return {
 				id: data.rows.item(0).id_technology,
 				name: data.rows.item(0).name,
@@ -129,8 +132,10 @@ export class DatabaseService {
 				gold: data.rows.item(0).gold,
 				buildTime: data.rows.item(0).build_time,
 				developsIn: data.rows.item(0).develops_in,
+				developsName: data.rows.item(0).name_structure,
 				civilization: data.rows.item(0).civilization,
-				age: data.rows.item(0).age
+				civilizationName: data.rows.item(0).civilization_name,
+				age: data.rows.item(0).name_age
 			}
 		});
 	}
@@ -200,5 +205,57 @@ export class DatabaseService {
 		});
 	}
 
+	public getUnicUnitsCivilization(id) {
+		return this.database.executeSql('SELECT id_unit, name, civilization FROM unit WHERE civilization = ?', [id]).then(data => {
+			let units = [];
+			if (data.rows.length > 0) {
+				for (var i = 0; i < data.rows.length; i++) {
+					units.push({ 
+						id: data.rows.item(i).id_unit,
+						name: data.rows.item(i).name
+					});
+				}
+			}
+			return units;
+		});
+	}
 
+	public getUnicTechnologiesCivilization(id) {
+		return this.database.executeSql('SELECT id_technology, name, civilization FROM technology WHERE civilization = ?', [id]).then(data => {
+			let technologies = [];
+			if (data.rows.length > 0) {
+				for (var i = 0; i < data.rows.length; i++) {
+					technologies.push({ 
+						id: data.rows.item(i).id_technology,
+						name: data.rows.item(i).name
+					});
+				}
+			}
+			return technologies;
+		});
+	}
+
+	public getStructureStats(id) {
+		return this.database.executeSql('SELECT structure_stat.*, age.name as age_name FROM structure_stat INNER JOIN age ON structure_stat.age = age.id_age WHERE structure = ?', [id]).then(data => {
+			let stats = [];
+			if (data.rows.length > 0) {
+				for (var i = 0; i < data.rows.length; i++) {
+					stats.push({ 
+						id: data.rows.item(i).id_structure_stat,
+						hit_points: data.rows.item(i).hit_points,
+						rate_of_fire: data.rows.item(i).rate_of_fire,
+						range: data.rows.item(i).range,
+						attack: data.rows.item(i).attack,
+						melee_armor: data.rows.item(i).melee_armor,
+						pierce_armor: data.rows.item(i).pierce_armor,
+						line_of_sight: data.rows.item(i).line_of_sight,
+						garrison: data.rows.item(i).garrison,
+						name: data.rows.item(i).age_name,
+						age: data.rows.item(i).age
+					});
+				}
+			}
+			return stats;
+		});
+	}
 }
