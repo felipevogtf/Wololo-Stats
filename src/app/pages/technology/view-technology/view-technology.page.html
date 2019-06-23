@@ -1,20 +1,95 @@
 <ion-header>
 	<ion-toolbar>
-		<ion-title>viewTechnology</ion-title>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="menu/technology"></ion-back-button>
+		</ion-buttons>
+		<ion-title>{{ technology.name }}</ion-title>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-	<ion-button [routerLink]="['/menu/technology']">home</ion-button>
-	<h1>{{ technology.id }} {{ technology.name }}</h1>
-	<h3>{{ technology.description }}</h3>
-	<h3>{{ technology.expansion }}</h3>
-	<h3>{{ technology.food }}</h3>
-	<h3>{{ technology.wood }}</h3>
-	<h3>{{ technology.stone }}</h3>
-	<h3>{{ technology.gold }}</h3>
-	<h3>{{ technology.buildTime }}</h3>
-	<h3>{{ technology.developsIn }}</h3>
-	<h3>{{ technology.civilization }}</h3>
-	<h3>{{ technology.age }}</h3>
+
+	<ion-card class="technology-detail">
+		<ion-grid>
+			<ion-row>
+				<ion-col>
+					<ion-item lines="full">
+						<ion-label>Edad</ion-label>
+					</ion-item>
+					<p>{{ technology.age }}</p>
+					<ion-item lines="full">
+						<ion-label>Expanción</ion-label>
+					</ion-item>
+					<p>{{ technology.expansion }}</p>
+					<ion-item lines="full">
+						<ion-label>Descripción</ion-label>
+					</ion-item>
+					<p>{{ technology.description }}</p>
+				</ion-col>
+
+			</ion-row>
+		</ion-grid>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>Costo producción</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-grid class="cost">
+				<ion-row>
+					<ion-col size="4">
+						<img src="assets/icon/home/wood.svg">
+						<h2>{{ technology.wood }}</h2>
+					</ion-col>
+					<ion-col size="4">
+						<img src="assets/icon/home/stone.svg">
+						<h2>{{ technology.stone }}</h2>
+					</ion-col>
+					<ion-col size="4">
+						<img src="assets/icon/home/gold.svg">
+						<h2>{{ technology.gold }}</h2>
+					</ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size="6">
+						<img src="assets/icon/home/meat.svg">
+						<h2>{{ technology.food }}</h2>
+					</ion-col>
+					<ion-col size="6">
+						<img src="assets/icon/home/clock.svg">
+						<h2>{{ technology.buildTime }} s</h2>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header>
+			<ion-card-title>Desarrollo</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			<ion-card-subtitle *ngIf="technology.civilizationName">Civilizacón</ion-card-subtitle>
+			<ion-item button lines="none" detail="true" *ngIf="technology.civilizationName" [routerLink]="['/menu/civilization', technology.civilization]">
+				<ion-avatar slot="start">
+					<ion-img src="assets/icon/civilization/{{technology.civilizationName}}.jpg"></ion-img>
+				</ion-avatar>
+				<ion-label>
+					<h2>{{ technology.civilizationName }}</h2>
+				</ion-label>
+			</ion-item>
+			<ion-card-subtitle>Creado en</ion-card-subtitle>
+			<ion-item button lines="none" detail="true" [routerLink]="['/menu/structure', technology.developsIn]">
+				<ion-avatar slot="start">
+					<ion-img src="assets/icon/structure/{{technology.developsName}}.png"></ion-img>
+				</ion-avatar>
+				<ion-label>
+					<h2>{{technology.developsName}}</h2>
+				</ion-label>
+			</ion-item>
+		</ion-card-content>
+	</ion-card>
 </ion-content>

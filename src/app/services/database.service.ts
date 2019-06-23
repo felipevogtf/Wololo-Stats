@@ -120,7 +120,7 @@ export class DatabaseService {
 	}
 
 	public getTechnology(id) {
-		return this.database.executeSql('SELECT * FROM technology WHERE id_technology = ?', [id]).then(data => {
+		return this.database.executeSql('SELECT technology.*, age.name as name_age, civilization.name as civilization_name, structure.name as name_structure FROM technology INNER JOIN age ON technology.age = age.id_age INNER JOIN structure ON technology.develops_in = structure.id_structure LEFT JOIN civilization ON technology.civilization = civilization.id_civilization WHERE id_technology = ?', [id]).then(data => {
 			return {
 				id: data.rows.item(0).id_technology,
 				name: data.rows.item(0).name,
@@ -132,8 +132,10 @@ export class DatabaseService {
 				gold: data.rows.item(0).gold,
 				buildTime: data.rows.item(0).build_time,
 				developsIn: data.rows.item(0).develops_in,
+				developsName: data.rows.item(0).name_structure,
 				civilization: data.rows.item(0).civilization,
-				age: data.rows.item(0).age
+				civilizationName: data.rows.item(0).civilization_name,
+				age: data.rows.item(0).name_age
 			}
 		});
 	}
