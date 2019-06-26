@@ -17,10 +17,9 @@ export class AppComponent {
     private db: DatabaseService,
     ) {
 
-    this.platform.ready().then(() => {
-      this.splashScreen.hide();
-      this.statusBar.styleDefault();
-    });
+    this.splashScreen.hide();
+    this.statusBar.styleDefault();
+
   }
 
   initializeApp() {

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { CompareService } from './../../services/compare.service';
+import { IonSlides } from '@ionic/angular';
 
 @Component({
 	selector: 'app-compare',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./compare.page.scss'],
 })
 export class ComparePage implements OnInit {
-	constructor() { }
 
-	ngOnInit() {
-		
+	@ViewChild (IonSlides) public slide: IonSlides;
+
+	constructor(public compare: CompareService) { }
+
+	ngOnInit() {	
+	}
+
+	public resetList(){
+		this.compare.reset();
+	}
+
+	public removeUnit(key){
+		this.compare.removeUnit(key);
+		this.slide.update();
+		this.slide.slidePrev();
 	}
 
 }
