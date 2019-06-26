@@ -1,5 +1,5 @@
 ion-toolbar{
-	--background: #FF641A;
+	--background: var(--ion-color-third);
 	--color: #F2F2F2 ;
 	ion-menu-button{
 		--color: #F2F2F2;
@@ -73,7 +73,7 @@ ion-grid{
 		--background: var(--ion-color-light-tint);
 		--border-radius: 15px;
 		text-align: center;
-		--ripple-color: #FF641A;
+		--ripple-color: var(--ion-color-third);
 		img{
 			display: block;
 			margin: auto;
@@ -87,5 +87,5 @@ ion-grid{
 }
 
 ion-slides {
-	--bullet-background-active: #FF641A;
+	--bullet-background-active: var(--ion-color-third);
 }

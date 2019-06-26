@@ -23,7 +23,7 @@ ion-card{
 
 }
 ion-slides {
-	--bullet-background-active: #FF641A;
+	--bullet-background-active: var(--ion-color-primary);
 }
 ion-slide >:first-child {
 	text-align: left;

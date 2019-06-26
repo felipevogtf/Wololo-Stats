@@ -7,7 +7,7 @@ ion-searchbar{
 	--background: #F2F2F2;
 }
 ion-toolbar{
-	--background: #FF641A;
+	--background: var(--ion-color-fourth);
 	--color: #F2F2F2 ;
 	ion-menu-button{
 		--color: #F2F2F2;
