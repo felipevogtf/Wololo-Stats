@@ -3,6 +3,8 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IonSearchbar } from '@ionic/angular';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { ToastController } from '@ionic/angular';
+import { CompareService } from './../../services/compare.service';
 
 @Component({
 	selector: 'app-unit',
@@ -38,7 +40,7 @@ export class UnitPage {
 
 	@ViewChild (IonSearchbar) public searchbar: IonSearchbar;
 	
-	constructor(private db: DatabaseService) { }
+	constructor(private db: DatabaseService, private compare: CompareService, public toastController: ToastController) { }
 
 	ngOnInit() {
 		this.db.getDatabaseState().subscribe(rdy => {
@@ -49,6 +51,24 @@ export class UnitPage {
 			}
 		});
 	}
+
+	async presentToast(message) {
+		const toast = await this.toastController.create({
+			message: message,
+			duration: 2000
+		});
+		toast.present();
+	}
+
+	public addUnitToCompare(unit){
+		if(!this.compare.findUnit(unit.id)){
+			this.compare.addUnit(unit);
+			this.presentToast('Unidad agregada a la comparación');
+		}else{
+			this.presentToast('La unidad ya esta agregada');
+		}
+	}
+
 
 	onSearch(event){
 		this.name = event.target.value;

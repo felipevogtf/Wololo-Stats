@@ -174,14 +174,44 @@ export class DatabaseService {
 	}
 
 	public loadUnits() {
-		let query = 'SELECT id_unit, name FROM unit';
+		let query = 'SELECT unit.*, age.name as age_name, civilization.name as civilization_name, structure.name as name_structure FROM unit INNER JOIN age ON unit.age = age.id_age INNER JOIN structure ON unit.created_in = structure.id_structure LEFT JOIN civilization ON unit.civilization = civilization.id_civilization';
 		return this.database.executeSql(query, []).then(data => {
 			let units = [];
 			if (data.rows.length > 0) {
 				for (var i = 0; i < data.rows.length; i++) {
+					let attackBonus = [];
+					if (data.rows.item(i).attack_bonus != '') {
+						attackBonus = JSON.parse(data.rows.item(i).attack_bonus);
+					}
+
 					units.push({ 
 						id: data.rows.item(i).id_unit,
-						name: data.rows.item(i).name
+						name: data.rows.item(i).name,
+						expansion: data.rows.item(i).expansion,
+						buildTime: data.rows.item(i).build_time,
+						hitPoints: data.rows.item(i).hit_points,
+						rateOfFire: data.rows.item(i).rate_of_fire,
+						frameDelay: data.rows.item(i).frame_delay,
+						range: data.rows.item(i).range,
+						accuracy: data.rows.item(i).accuracy,
+						projectileSpeed: data.rows.item(i).projectile_speed,
+						meleeArmor: data.rows.item(i).melee_armor,
+						pierceArmor: data.rows.item(i).pierce_armor,
+						speed: data.rows.item(i).speed,
+						lineOfSight: data.rows.item(i).line_of_sight,
+						garrison: data.rows.item(i).garrison,
+						blastRadius: data.rows.item(i).blast_radius,
+						wood: data.rows.item(i).wood,
+						gold: data.rows.item(i).gold,
+						stone: data.rows.item(i).stone,
+						food: data.rows.item(i).food,
+						attack: data.rows.item(i).attack,
+						createdIn: data.rows.item(i).created_in,
+						createdInName: data.rows.item(i).name_structure,
+						civilization: data.rows.item(i).civilization,
+						civilizationName: data.rows.item(i).civilization_name,
+						age: data.rows.item(i).age_name,
+						attackBonus: attackBonus
 					});
 				}
 			}
