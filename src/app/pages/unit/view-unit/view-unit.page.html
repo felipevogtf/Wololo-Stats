@@ -4,6 +4,11 @@
 			<ion-back-button defaultHref="menu/unit"></ion-back-button>
 		</ion-buttons>
 		<ion-title>{{ unit.name }}</ion-title>
+		<ion-buttons slot="end">
+			<ion-button icon-only size="large" (click)="addUnitToCompare()">
+				<ion-icon name="clipboard"></ion-icon>
+			</ion-button>
+		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
 

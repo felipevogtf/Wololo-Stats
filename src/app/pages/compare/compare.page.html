@@ -1,12 +1,195 @@
-<ion-header>
+<ion-header no-border>
 	<ion-toolbar>
 		<ion-buttons slot="start">
 			<ion-menu-button></ion-menu-button>
 		</ion-buttons>
-		<ion-title>compare</ion-title>
+		<ion-title></ion-title>
+		<ion-buttons slot="end">
+			<ion-button icon-only size="large" (click)="resetList()">
+				<ion-icon name="refresh"></ion-icon>
+			</ion-button>
+		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+
+
+	<ion-slides pager="true">
+		<ion-slide *ngFor="let unit of compare.getUnitsToCompare(); let i = index">
+			<ion-card>
+				<ion-card-header>
+					<ion-card-title>{{ unit.name }}</ion-card-title>
+				</ion-card-header>
+				<ion-card-content>
+					<ion-grid>
+						<ion-item lines="none">
+							<ion-avatar>
+								<img src="assets/icon/unit/{{unit.name}}.png">
+							</ion-avatar>
+						</ion-item>
+						<ion-card-title>Costo producción</ion-card-title>
+						<ion-row class="cost">
+							<ion-col size="2" offset="1">
+								<img src="assets/icon/home/wood.svg">
+								<h6>{{ unit.wood }}</h6>
+							</ion-col>
+							<ion-col size="2">
+								<img src="assets/icon/home/stone.svg">
+								<h6>{{ unit.stone }}</h6>
+							</ion-col>
+							<ion-col size="2">
+								<img src="assets/icon/home/gold.svg">
+								<h6>{{ unit.gold }}</h6>
+							</ion-col>
+							<ion-col size="2">
+								<img src="assets/icon/home/meat.svg">
+								<h6>{{ unit.food }}</h6>
+							</ion-col>
+							<ion-col size="2">
+								<img src="assets/icon/home/clock.svg">
+								<h6>{{ unit.buildTime }} s</h6>
+							</ion-col>
+						</ion-row>
+						<ion-card-title>Estadisticas</ion-card-title>
+						<ion-row class="unit-stats">
+							<ion-col>
+								<ion-row>
+									<ion-col size="6">
+										<p>Vida:</p>
+									</ion-col>
+									<ion-col size="6">
+										<p *ngIf="unit.hitPoints">{{ unit.hitPoints }}</p>
+										<p *ngIf="!unit.hitPoints">-</p>
+									</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col size="6">
+										<p>Ataque:</p>
+									</ion-col>
+									<ion-col size="6">
+										<p *ngIf="unit.attack">{{ unit.attack }}</p>
+										<p *ngIf="!unit.attack">-</p>
+									</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col size="6">
+										<p>Armadura:</p>
+									</ion-col>
+									<ion-col size="6">
+										<p *ngIf="unit.meleeArmor">{{ unit.meleeArmor }}</p>
+										<p *ngIf="!unit.meleeArmor">-</p>
+									</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col size="6">
+										<p>Ant.proy:</p>
+									</ion-col>
+									<ion-col size="6">
+										<p *ngIf="unit.pierceArmor">{{ unit.pierceArmor }}</p>
+										<p *ngIf="!unit.pierceArmor">-</p>
+									</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col size="6">
+										<p>Velocidad:</p>
+									</ion-col>
+									<ion-col size="6">
+										<p *ngIf="unit.speed">{{ unit.speed }}</p>
+										<p *ngIf="!unit.speed">-</p>
+									</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col size="6">
+										<p>Vision:</p>
+									</ion-col>
+									<ion-col size="6">
+										<p *ngIf="unit.lineOfSight">{{ unit.lineOfSight }}</p>
+										<p *ngIf="!unit.lineOfSight">-</p>
+									</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col size="6">
+										<p>Cadencia:</p>
+									</ion-col>
+									<ion-col size="6">
+										<p *ngIf="unit.rateOfFire">{{ unit.rateOfFire }}</p>
+										<p *ngIf="!unit.rateOfFire">-</p>
+									</ion-col>
+								</ion-row>
+							</ion-col>
+
+							<ion-col>
+								<ion-row>
+									<ion-col size="6">
+										<p>F.delay:</p>
+									</ion-col>
+									<ion-col size="6">
+										<p *ngIf="unit.frameDelay">{{ unit.frameDelay }}</p>
+										<p *ngIf="!unit.frameDelay">-</p>
+									</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col size="6">
+										<p>Rango:</p>
+									</ion-col>
+									<ion-col size="6">
+										<p *ngIf="unit.range">{{ unit.range }}</p>
+										<p *ngIf="!unit.range">-</p>
+									</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col size="6">
+										<p>Precisión:</p>
+									</ion-col>
+									<ion-col size="6">
+										<p *ngIf="unit.accuracy">{{ unit.accuracy }}</p>
+										<p *ngIf="!unit.accuracy">-</p>
+									</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col size="6">
+										<p>Vel.proy:</p>
+									</ion-col>
+									<ion-col size="6">
+										<p *ngIf="unit.projectileSpeed">{{ unit.projectileSpeed }}</p>
+										<p *ngIf="!unit.projectileSpeed">-</p>
+									</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col size="6">
+										<p>Guarnicón:</p>
+									</ion-col>
+									<ion-col size="6">
+										<p *ngIf="unit.garrison">{{ unit.garrison }}</p>
+										<p *ngIf="!unit.garrison">-</p>
+									</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col size="6">
+										<p>Rad.expl:</p>
+									</ion-col>
+									<ion-col size="6">
+										<p *ngIf="unit.blastRadius">{{ unit.blastRadius }}</p>
+										<p *ngIf="!unit.blastRadius">-</p>
+									</ion-col>
+								</ion-row>
+							</ion-col>
+						</ion-row>
+						<ion-card-title>Estadisticas</ion-card-title>
+						<ion-row>
+							<ion-col>
+								<p *ngFor="let bonus of unit.attackBonus">{{ bonus }}</p>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-button shape="round" (click)="removeUnit(i)"><ion-icon name="close"></ion-icon></ion-button>
+						</ion-row>
+					</ion-grid>
+				</ion-card-content>
+			</ion-card>
+		</ion-slide>
+	</ion-slides>
 
 </ion-content>

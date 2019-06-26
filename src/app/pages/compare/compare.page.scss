@@ -1,0 +1,62 @@
+ion-content{
+	--ion-background-color: var(--ion-color-light-tint);
+}
+ion-toolbar{
+	--ion-toolbar-background: var(--ion-color-light-tint);
+}
+.ios ion-menu-button{
+	--color: rgb(66, 66, 66);
+}
+
+ion-card{
+	background-color: white;
+	box-shadow: none;
+	border-radius: 15px;
+	margin-bottom: 20px;
+	ion-avatar{
+		margin: auto;
+	}
+	ion-item{
+		--background: white;
+		--padding-start: 0;
+	}
+
+}
+ion-slides {
+	--bullet-background-active: #FF641A;
+}
+ion-slide >:first-child {
+	text-align: left;
+	width: 100%;
+}
+
+ion-card{
+	margin-bottom: 35px;
+}
+
+ion-card-content{
+	ion-card-title{
+		margin-top: 10px;
+	}
+}
+.cost{
+	h6{
+		margin-top: 5px;
+		text-align: center;
+	}
+	img{
+		display: block;
+		margin: auto;
+		max-height: 25px;
+		width: auto;
+		border-radius: 0px !important;
+	}
+}
+.unit-stats{
+	padding-left: 12px !important;
+	padding-right: 12px !important;
+	text-align: center;
+	p{
+		font-size: 12px;
+	}
+}
