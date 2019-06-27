@@ -14,7 +14,14 @@ ion-content{
 .ios ion-back-button{
 	--color: #F2F2F2;
 }
-
+ion-button{
+	img{
+		display: block;
+		margin: auto;
+		width: 20px;
+		height: auto;
+	}
+}
 ion-card{
 	background-color: white;
 	box-shadow: none;

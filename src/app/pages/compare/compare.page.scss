@@ -8,6 +8,11 @@ ion-toolbar{
 	--color: rgb(66, 66, 66);
 }
 
+ion-fab-button{
+	--background: var(--ion-color-danger);
+	--color: white;
+}
+
 ion-card{
 	background-color: white;
 	box-shadow: none;
@@ -23,7 +28,7 @@ ion-card{
 
 }
 ion-slides {
-	--bullet-background-active: var(--ion-color-primary);
+	--bullet-background-active: rgb(66, 66, 66);
 }
 ion-slide >:first-child {
 	text-align: left;

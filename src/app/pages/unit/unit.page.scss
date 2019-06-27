@@ -16,3 +16,7 @@ ion-toolbar{
 		color: #F2F2F2;
 	}
 }
+ion-item-option{
+	--background: var(--ion-color-second);
+	--color: white;
+}

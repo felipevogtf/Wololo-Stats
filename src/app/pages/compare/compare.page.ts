@@ -9,6 +9,11 @@ import { IonSlides } from '@ionic/angular';
 })
 export class ComparePage implements OnInit {
 
+	slideOpts = {
+		initialSlide: 0,
+		observer: true,
+	};
+
 	@ViewChild (IonSlides) public slide: IonSlides;
 
 	constructor(public compare: CompareService) { }

@@ -6,7 +6,7 @@
 		<ion-title></ion-title>
 		<ion-buttons slot="end">
 			<ion-button icon-only size="large" (click)="resetList()">
-				<ion-icon name="refresh"></ion-icon>
+				<ion-icon src="assets/icon/home/delete.svg"></ion-icon>
 			</ion-button>
 		</ion-buttons>
 	</ion-toolbar>
@@ -16,9 +16,14 @@
 
 
 
-	<ion-slides pager="true">
+	<ion-slides pager="true" [options]="slideOpts">
 		<ion-slide *ngFor="let unit of compare.getUnitsToCompare(); let i = index">
 			<ion-card>
+				<ion-fab vertical="top" horizontal="end">
+					<ion-fab-button (click)="removeUnit(i)" size="small">
+						<ion-icon name="close"></ion-icon>
+					</ion-fab-button>
+				</ion-fab>
 				<ion-card-header>
 					<ion-card-title>{{ unit.name }}</ion-card-title>
 				</ion-card-header>
@@ -182,9 +187,6 @@
 							<ion-col>
 								<p *ngFor="let bonus of unit.attackBonus">{{ bonus }}</p>
 							</ion-col>
-						</ion-row>
-						<ion-row>
-							<ion-button shape="round" (click)="removeUnit(i)"><ion-icon name="close"></ion-icon></ion-button>
 						</ion-row>
 					</ion-grid>
 				</ion-card-content>
