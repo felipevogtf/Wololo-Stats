@@ -1,3 +1,91 @@
-.active-item{
-	border-left: 8px solid var(--ion-color-primary);
+.md ion-list{
+	padding-left: 15px;
+}
+
+ion-icon{
+	margin-right: 5px;
+}
+ion-toolbar{
+	--opacity: 0;
+	--color: white;
+}
+ion-header{
+ 	background: linear-gradient(-45deg, #FFDA2D, #F03800, #FF641A, #FDBF00);
+ 	background-size: 400% 400%;
+	animation: Gradient 15s ease infinite !important;
+
+
+}
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+.home{
+	color: #FDBF00;
+	ion-icon{
+		fill: #FDBF00;
+	}
+}
+.civilization{
+	color: var(--ion-color-first);
+	ion-icon{
+		fill: var(--ion-color-first);
+	}
+}
+.unit{
+	color: var(--ion-color-second);
+	ion-icon{
+		fill: var(--ion-color-second);
+	}
+}
+.structure{
+	color: var(--ion-color-third);
+	ion-icon{
+		fill: var(--ion-color-third);
+	}
+}
+.technology{
+	color: var( --ion-color-fourth);
+	ion-icon{
+		fill: var( --ion-color-fourth);
+	}
+}
+.compare{
+	color: rgb(66, 66, 66);
+	ion-icon{
+		fill: rgb(66, 66, 66);
+	}
 }

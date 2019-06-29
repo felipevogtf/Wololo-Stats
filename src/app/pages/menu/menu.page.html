@@ -3,14 +3,15 @@
 	<ion-menu contentId="content" type="overlay">
 		<ion-header>
 			<ion-toolbar>
-				<ion-title>Menu</ion-title>
+				<ion-title>Wololo Stats</ion-title>
 			</ion-toolbar>
 		</ion-header>
 		<ion-content>
 			<ion-list>
 				<ion-menu-toggle auto-hide="false" *ngFor="let page of pages">
-					<ion-item [routerLink]="page.url" [routerDirection]="page.direction" routerLinkActive="active-item">
-						{{ page.tittle }} 
+					<ion-item [routerLink]="page.url" [routerDirection]="page.direction" routerLinkActive="{{page.style}}" lines="none">
+						<ion-icon [src]="page.icon"></ion-icon>
+						<p>{{ page.tittle }}</p>
 					</ion-item>
 				</ion-menu-toggle>
 			</ion-list>
