@@ -13,6 +13,9 @@
 		animated >
 	</ion-searchbar>
 	<ion-buttons slot="end" [@openClose]="isOpen ? 'open' : 'closed'">
+		<ion-button icon-only size="large" (click)="presentActionSheet()">
+			<ion-icon name="options"></ion-icon>
+		</ion-button>
 		<ion-button icon-only size="large" (click)="openSearch()">
 			<ion-icon name="search"></ion-icon>
 		</ion-button>
@@ -21,12 +24,15 @@
 </ion-header>
 
 <ion-content>
-
 	<ion-grid>
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-virtual-scroll [items]="units | filterBy: ['name']: name" approxItemHeight="56px">
+					<ion-virtual-scroll [items]="units | filterBy: ['name']: name | filterBy: ['createdInName']: structure" approxItemHeight="56px" [headerFn]="separateAge">
+						<ion-item-divider *virtualHeader="let header">
+							<b>{{ header }}</b>
+						</ion-item-divider>
+
 						<ion-item-sliding *virtualItem="let unit" class="animated fadeIn faster">
 							<ion-item button  [routerLink]="['/menu/unit', unit.id]">
 								<ion-avatar slot="start">

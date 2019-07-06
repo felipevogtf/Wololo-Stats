@@ -174,7 +174,7 @@ export class DatabaseService {
 	}
 
 	public loadUnits() {
-		let query = 'SELECT unit.*, age.name as age_name, civilization.name as civilization_name, structure.name as name_structure FROM unit INNER JOIN age ON unit.age = age.id_age INNER JOIN structure ON unit.created_in = structure.id_structure LEFT JOIN civilization ON unit.civilization = civilization.id_civilization';
+		let query = 'SELECT unit.*, age.name as age_name, civilization.name as civilization_name, structure.name as name_structure FROM unit INNER JOIN age ON unit.age = age.id_age INNER JOIN structure ON unit.created_in = structure.id_structure LEFT JOIN civilization ON unit.civilization = civilization.id_civilization ORDER BY age';
 		return this.database.executeSql(query, []).then(data => {
 			let units = [];
 			if (data.rows.length > 0) {

@@ -1,7 +1,7 @@
 import { DatabaseService } from './../../services/database.service';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IonSearchbar } from '@ionic/angular';
+import { IonSearchbar, ActionSheetController } from '@ionic/angular';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ToastController } from '@ionic/angular';
 import { CompareService } from './../../services/compare.service';
@@ -37,10 +37,11 @@ export class UnitPage {
 	units = [];
 	isOpen = true;
 	name = "";
+	structure = "";
 
 	@ViewChild (IonSearchbar) public searchbar: IonSearchbar;
 	
-	constructor(private db: DatabaseService, private compare: CompareService, public toastController: ToastController) { }
+	constructor(private db: DatabaseService, private compare: CompareService, public toastController: ToastController, public actionSheetController: ActionSheetController) { }
 
 	ngOnInit() {
 		this.db.getDatabaseState().subscribe(rdy => {
@@ -79,5 +80,85 @@ export class UnitPage {
 	}
 	closeSearch(){
 		this.isOpen = true;
+	}
+
+	separateAge(record, recordIndex, records) {
+		if (recordIndex == 0) {
+			return record.age;
+		}
+
+		if (!records[recordIndex + 1] || !records[recordIndex + 2]) {
+			return null;
+		}
+
+		let first_prev = records[recordIndex - 1].age;
+		let first_current = record.age;
+
+		if (first_prev != first_current) {
+			return first_current;
+		}
+		return null;
+	}
+
+	async presentActionSheet() {
+		const actionSheet = await this.actionSheetController.create({
+			header: 'Estructuras',
+			animated: true,
+			cssClass: 'action-sheet',
+			buttons: [{
+				text: 'Cuarteles',
+				handler: () => {
+					this.structure = 'Cuarteles';
+				}
+			}, {
+				text: 'Muelle',
+				handler: () => {
+					this.structure = 'Muelle';
+				}
+			}, {
+				text: 'Centro Urbano',
+				handler: () => {
+					this.structure = 'Centro Urbano';
+				}
+			}, {
+				text: 'Galería de tiro con arco',
+				handler: () => {
+					this.structure = 'Galería de tiro con arco';
+				}
+			},{
+				text: 'Mercado',
+				handler: () => {
+					this.structure = 'Mercado';
+				}
+			},{
+				text: 'Establo',
+				handler: () => {
+					this.structure = 'Establo';
+				}
+			},{
+				text: 'Castillo',
+				handler: () => {
+					this.structure = 'Castillo';
+				}
+			},{
+				text: 'Monasterio',
+				handler: () => {
+					this.structure = 'Monasterio';
+				}
+			},{
+				text: 'Taller de maquinaria de asedio',
+				handler: () => {
+					this.structure = 'Taller de maquinaria de asedio';
+				}
+			},{
+				text: 'Cancel',
+				icon: 'close',
+				role: 'cancel',
+				handler: () => {
+					this.structure = "";
+				}
+			}]
+		});
+		await actionSheet.present();
 	}
 }
