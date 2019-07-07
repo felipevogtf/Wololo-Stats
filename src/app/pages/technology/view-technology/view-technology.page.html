@@ -72,7 +72,7 @@
 		</ion-card-header>
 
 		<ion-card-content>
-			<ion-card-subtitle *ngIf="technology.civilizationName">Civilizacón</ion-card-subtitle>
+			<ion-card-subtitle *ngIf="technology.civilizationName">Civilización</ion-card-subtitle>
 			<ion-item button lines="none" detail="true" *ngIf="technology.civilizationName" [routerLink]="['/menu/civilization', technology.civilization]">
 				<ion-avatar slot="start">
 					<ion-img src="assets/icon/civilization/{{technology.civilizationName}}.jpg"></ion-img>

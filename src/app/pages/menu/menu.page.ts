@@ -38,7 +38,7 @@ export class MenuPage implements OnInit {
 		direction: 'forward'
 	},
 	{
-		tittle: 'Tecnologias',
+		tittle: 'Tecnologías',
 		style: 'technology',
 		url: '/menu/technology',
 		icon: 'assets/icon/home/technology-menu.svg',

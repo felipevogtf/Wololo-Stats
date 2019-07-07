@@ -37,7 +37,7 @@
 		</ion-card-header>
 
 		<ion-card-content>
-			<ion-card-subtitle *ngIf="unit.civilizationName">Civilizacón</ion-card-subtitle>
+			<ion-card-subtitle *ngIf="unit.civilizationName">Civilización</ion-card-subtitle>
 			<ion-item button lines="none" detail="true" *ngIf="unit.civilizationName" [routerLink]="['/menu/civilization', unit.civilization]">
 				<ion-avatar slot="start">
 					<ion-img src="assets/icon/civilization/{{unit.civilizationName}}.jpg"></ion-img>
@@ -96,7 +96,7 @@
 
 	<ion-card>
 		<ion-card-header>
-			<ion-card-title>Estadisticas</ion-card-title>
+			<ion-card-title>Estadísticas</ion-card-title>
 		</ion-card-header>
 		<ion-grid class="unit-stats">
 			<ion-row>
@@ -148,7 +148,7 @@
 					</ion-row>
 					<ion-row>
 						<ion-col size="6">
-							<p>Vision:</p>
+							<p>Visión:</p>
 						</ion-col>
 						<ion-col size="6">
 							<p *ngIf="unit.lineOfSight">{{ unit.lineOfSight }}</p>
@@ -205,7 +205,7 @@
 					</ion-row>
 					<ion-row>
 						<ion-col size="6">
-							<p>Guarnicón:</p>
+							<p>Guarnición:</p>
 						</ion-col>
 						<ion-col size="6">
 							<p *ngIf="unit.garrison">{{ unit.garrison }}</p>
