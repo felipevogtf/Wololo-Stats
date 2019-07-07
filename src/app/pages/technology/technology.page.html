@@ -13,6 +13,9 @@
 		animated >
 	</ion-searchbar>
 	<ion-buttons slot="end" [@openClose]="isOpen ? 'open' : 'closed'">
+		<ion-button icon-only size="large" (click)="presentActionSheet()">
+			<ion-icon name="options"></ion-icon>
+		</ion-button>
 		<ion-button icon-only size="large" (click)="openSearch()">
 			<ion-icon name="search"></ion-icon>
 		</ion-button>
@@ -28,7 +31,10 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-virtual-scroll [items]="technologies | filterBy: ['name']: name" approxItemHeight="56px">
+					<ion-virtual-scroll [items]="technologies | filterBy: ['name']: name | filterBy: ['structure']: structure" approxItemHeight="56px" [headerFn]="separateAge" approxHeaderHeight="41px">
+						<ion-item-divider *virtualHeader="let header" class="animated fadeIn faster">
+							<b>{{ header }}</b>
+						</ion-item-divider>
 						<ion-item button *virtualItem="let technology" [routerLink]="['/menu/technology', technology.id]" class="animated fadeIn faster">
 							<ion-avatar slot="start">
 								<ion-img src="assets/icon/technology/{{technology.name}}.jpg"></ion-img>
@@ -39,7 +45,7 @@
 						</ion-item>
 					</ion-virtual-scroll>
 
-					<div *ngIf="!technologies.length > 0">
+					<div *ngIf="!(technologies.length > 0)">
 						<ion-item *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">
 							<ion-avatar slot="start">
 								<ion-skeleton-text animated></ion-skeleton-text>

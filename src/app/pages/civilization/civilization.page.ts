@@ -63,4 +63,15 @@ export class CivilizationPage {
 	closeSearch(){
 		this.isOpen = true;
 	}
+
+	separateExpansion(record, recordIndex, records) {
+		if(recordIndex == 0){
+			return record.expansion;
+		}
+
+		if(record.expansion != records[recordIndex-1].expansion){
+			return record.expansion;
+		}
+		return null;
+	}
 }

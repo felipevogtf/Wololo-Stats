@@ -83,19 +83,12 @@ export class UnitPage {
 	}
 
 	separateAge(record, recordIndex, records) {
-		if (recordIndex == 0) {
+		if(recordIndex == 0){
 			return record.age;
 		}
 
-		if (!records[recordIndex + 1] || !records[recordIndex + 2]) {
-			return null;
-		}
-
-		let first_prev = records[recordIndex - 1].age;
-		let first_current = record.age;
-
-		if (first_prev != first_current) {
-			return first_current;
+		if(record.age != records[recordIndex-1].age){
+			return record.age;
 		}
 		return null;
 	}

@@ -16,17 +16,20 @@ export class DatabaseService {
 
 	constructor(private plt: Platform, private sqlitePorter: SQLitePorter, private sqlite: SQLite, private http: HttpClient) {
 
-		this.plt.ready().then(() => {
-			this.sqlite.create({
-				name: 'ageofempire2def.db',
-				location: 'default'
-			})
-			.then((db: SQLiteObject) => {
-				this.database = db;
-				this.seedDatabase();
-			});
-		});
+		 this.plt.ready().then(() => {
+            this.createDatabaseObject();
+        });
 
+	}
+
+	createDatabaseObject(): void {
+		this.sqlite.create({
+			name: 'ageofempire2def2.db',
+			location: 'default'
+		}).then((db : SQLiteObject) => {
+			this.database = db;
+			this.seedDatabase();
+		});
 	}
 
 	private seedDatabase() {
@@ -141,14 +144,16 @@ export class DatabaseService {
 	}
 
 	public loadStructures() {
-		let query = 'SELECT id_structure, name FROM structure';
+		let query = 'SELECT structure.id_structure, structure.name, age.name as age_name, structure_type.name as type FROM structure INNER JOIN age ON structure.age = age.id_age INNER JOIN structure_type ON structure.type = structure_type.id_structure_type ORDER BY age';
 		return this.database.executeSql(query, []).then(data => {
 			let structures = [];
 			if (data.rows.length > 0) {
 				for (var i = 0; i < data.rows.length; i++) {
 					structures.push({ 
 						id: data.rows.item(i).id_structure,
-						name: data.rows.item(i).name
+						name: data.rows.item(i).name,
+						age: data.rows.item(i).age_name,
+						type: data.rows.item(i).type,
 					});
 				}
 			}
@@ -157,7 +162,7 @@ export class DatabaseService {
 	}
 
 	public loadCivilizations() {
-		let query = 'SELECT id_civilization, name, characteristic_civilization FROM civilization';
+		let query = 'SELECT id_civilization, name, characteristic_civilization, expansion FROM civilization ORDER BY expansion';
 		return this.database.executeSql(query, []).then(data => {
 			let civilizations = [];
 			if (data.rows.length > 0) {
@@ -166,6 +171,7 @@ export class DatabaseService {
 						id: data.rows.item(i).id_civilization,
 						name: data.rows.item(i).name,
 						description: data.rows.item(i).characteristic_civilization,
+						expansion: data.rows.item(i).expansion,
 					});
 				}
 			}
@@ -220,14 +226,16 @@ export class DatabaseService {
 	}
 
 	public loadTechnologies() {
-		let query = 'SELECT id_technology, name FROM technology';
+		let query = 'SELECT technology.id_technology, technology.name, age.name as age_name, structure.name as structure_name FROM technology INNER JOIN age ON technology.age = age.id_age INNER JOIN structure ON technology.develops_in = structure.id_structure ORDER BY technology.age';
 		return this.database.executeSql(query, []).then(data => {
 			let technologies = [];
 			if (data.rows.length > 0) {
 				for (var i = 0; i < data.rows.length; i++) {
 					technologies.push({ 
 						id: data.rows.item(i).id_technology,
-						name: data.rows.item(i).name
+						name: data.rows.item(i).name,
+						age: data.rows.item(i).age_name,
+						structure: data.rows.item(i).structure_name
 					});
 				}
 			}

@@ -13,6 +13,9 @@
 		animated >
 	</ion-searchbar>
 	<ion-buttons slot="end" [@openClose]="isOpen ? 'open' : 'closed'">
+		<ion-button icon-only size="large" (click)="presentActionSheet()">
+			<ion-icon name="options"></ion-icon>
+		</ion-button>
 		<ion-button icon-only size="large" (click)="openSearch()">
 			<ion-icon name="search"></ion-icon>
 		</ion-button>
@@ -26,7 +29,10 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-virtual-scroll [items]="structures | filterBy: ['name']: name" approxItemHeight="56px">
+					<ion-virtual-scroll [items]="structures | filterBy: ['name']: name | filterBy: ['type']: type" approxItemHeight="56px" approxHeaderHeight="41px" [headerFn]="separateAge" >
+						<ion-item-divider *virtualHeader="let header" class="animated fadeIn faster">
+							<b>{{ header }}</b>
+						</ion-item-divider>
 						<ion-item button *virtualItem="let structure" [routerLink]="['/menu/structure', structure.id]" class="animated fadeIn faster">
 							<ion-avatar slot="start">
 								<ion-img src="assets/icon/structure/{{structure.name}}.png"></ion-img>
@@ -37,7 +43,7 @@
 						</ion-item>
 					</ion-virtual-scroll>
 
-					<div *ngIf="!structures.length > 0">
+					<div *ngIf="!(structures.length > 0)">
 						<ion-item *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">
 							<ion-avatar slot="start">
 								<ion-skeleton-text animated></ion-skeleton-text>

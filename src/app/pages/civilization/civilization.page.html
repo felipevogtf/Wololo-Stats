@@ -26,8 +26,11 @@
 		<ion-row>
 			<ion-col>
 				<ion-list>
-					<ion-virtual-scroll [items]="civilizations | filterBy: ['name']: name" approxItemHeight="67px">
-						<ion-item button *virtualItem="let civilization" [routerLink]="['/menu/civilization', civilization.id]" class="animated fadeIn faster">
+					<ion-virtual-scroll [items]="civilizations | filterBy: ['name']: name" approxItemHeight="67px"  approxHeaderHeight="41px" [headerFn]="separateExpansion"> 
+						<ion-item-divider *virtualHeader="let header" class="animated fadeIn faster">
+							<b>{{ header }}</b>
+						</ion-item-divider>
+						<ion-item button *virtualItem="let civilization" [routerLink]="['/menu/civilization', civilization.id]" class="animated fadeIn faster" >
 							<ion-avatar slot="start">
 								<ion-img src="assets/icon/civilization/{{civilization.name}}.jpg"></ion-img>
 							</ion-avatar>
@@ -38,7 +41,7 @@
 						</ion-item>
 					</ion-virtual-scroll>
 
-					<div *ngIf="!civilizations.length > 0">
+					<div *ngIf="!(civilizations.length > 0)">
 						<ion-item *ngFor="let item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">
 							<ion-avatar slot="start">
 								<ion-skeleton-text animated></ion-skeleton-text>

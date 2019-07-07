@@ -1,7 +1,7 @@
 import { DatabaseService } from './../../services/database.service';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IonSearchbar } from '@ionic/angular';
+import { IonSearchbar, ActionSheetController } from '@ionic/angular';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
@@ -35,10 +35,11 @@ export class TechnologyPage {
 	technologies = [];
 	isOpen = true;
 	name = "";
+	structure = "";
 
 	@ViewChild (IonSearchbar) public searchbar: IonSearchbar;
 
-	constructor(private db: DatabaseService) { }
+	constructor(private db: DatabaseService, public actionSheetController: ActionSheetController) { }
 
 	ngOnInit() {
 		this.db.getDatabaseState().subscribe(rdy => {
@@ -60,4 +61,102 @@ export class TechnologyPage {
 	closeSearch(){
 		this.isOpen = true;
 	}
+
+	separateAge(record, recordIndex, records) {
+		if(recordIndex == 0){
+			return record.age;
+		}
+
+		if(record.age != records[recordIndex-1].age){
+			return record.age;
+		}
+		return null;
+	}
+	async presentActionSheet() {
+		const actionSheet = await this.actionSheetController.create({
+			header: 'Estructuras',
+			animated: true,
+			cssClass: 'action-sheet',
+			buttons: [{
+				text: 'Cuarteles',
+				handler: () => {
+					this.structure = 'Cuarteles';
+				}
+			}, {
+				text: 'Muelle',
+				handler: () => {
+					this.structure = 'Muelle';
+				}
+			}, {
+				text: 'Campamento Madero',
+				handler: () => {
+					this.structure = 'Campamento Madero';
+				}
+			}, {
+				text: 'Molino',
+				handler: () => {
+					this.structure = 'Molino';
+				}
+			},{
+				text: 'Campamento Minero',
+				handler: () => {
+					this.structure = 'Campamento Minero';
+				}
+			},{
+				text: 'Centro Urbano',
+				handler: () => {
+					this.structure = 'Centro Urbano';
+				}
+			},{
+				text: 'Galería de tiro con arco',
+				handler: () => {
+					this.structure = 'Galería de tiro con arco';
+				}
+			},{
+				text: 'Herrería',
+				handler: () => {
+					this.structure = 'Herrería';
+				}
+			},{
+				text: 'Mercado',
+				handler: () => {
+					this.structure = 'Mercado';
+				}
+			},{
+				text: 'Establo',
+				handler: () => {
+					this.structure = 'Establo';
+				}
+			},{
+				text: 'Castillo',
+				handler: () => {
+					this.structure = 'Castillo';
+				}
+			},{
+				text: 'Monasterio',
+				handler: () => {
+					this.structure = 'Monasterio';
+				}
+			},{
+				text: 'Taller de maquinaria de asedio',
+				handler: () => {
+					this.structure = 'Taller de maquinaria de asedio';
+				}
+			},{
+				text: 'Universidad',
+				handler: () => {
+					this.structure = 'Universidad';
+				}
+			},{
+				text: 'Cancel',
+				icon: 'close',
+				role: 'cancel',
+				handler: () => {
+					this.structure = "";
+				}
+			}]
+		});
+		await actionSheet.present();
+	}
+
 }

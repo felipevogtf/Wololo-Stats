@@ -10,11 +10,18 @@ ion-toolbar{
 	--color: white;
 }
 ion-header{
- 	background: linear-gradient(-45deg, #FFDA2D, #F03800, #FF641A, #FDBF00);
- 	background-size: 400% 400%;
+	background: linear-gradient(-45deg, #FFDA2D, #F03800, #FF641A, #FDBF00);
+	background-size: 400% 400%;
 	animation: Gradient 15s ease infinite !important;
 
 
+}
+
+ion-fab-button{
+	ion-icon{
+		margin: 0;
+	}
+	--background: rgb(66,66,66);
 }
 
 @-webkit-keyframes Gradient {

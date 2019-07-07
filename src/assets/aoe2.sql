@@ -196,7 +196,7 @@ INSERT or IGNORE INTO structure(id_structure, name, expansion, wood, stone, gold
 INSERT or IGNORE INTO structure(id_structure, name, expansion, wood, stone, gold, build_time, type, age ) VALUES (10,'Galería de tiro con arco','Age of Kings',175,0,0,50,3,2);
 INSERT or IGNORE INTO structure(id_structure, name, expansion, wood, stone, gold, build_time, type, age ) VALUES (11,'Herrería','Age of Kings',150,0,0,40,2,2);
 INSERT or IGNORE INTO structure(id_structure, name, expansion, wood, stone, gold, build_time, type, age ) VALUES (12,'Mercado','Age of Kings',175,0,0,60,1,2);
-INSERT or IGNORE INTO structure(id_structure, name, expansion, wood, stone, gold, build_time, type, age ) VALUES (13,'Establo','Age of Kings',175,0,0,50,3,1);
+INSERT or IGNORE INTO structure(id_structure, name, expansion, wood, stone, gold, build_time, type, age ) VALUES (13,'Establo','Age of Kings',175,0,0,50,3,2);
 INSERT or IGNORE INTO structure(id_structure, name, expansion, wood, stone, gold, build_time, type, age ) VALUES (14,'Castillo','Age of Kings',0,650,0,200,3,3);
 INSERT or IGNORE INTO structure(id_structure, name, expansion, wood, stone, gold, build_time, type, age ) VALUES (15,'Monasterio','Age of Kings',175,0,0,40,5,3);
 INSERT or IGNORE INTO structure(id_structure, name, expansion, wood, stone, gold, build_time, type, age ) VALUES (16,'Taller de maquinaria de asedio','Age of Kings',200,0,0,40,3,3);

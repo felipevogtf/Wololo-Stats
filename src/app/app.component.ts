@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { DatabaseService } from './services/database.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +13,6 @@ export class AppComponent {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    private db: DatabaseService,
     ) {
 
     this.splashScreen.hide();
@@ -24,8 +22,11 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      setTimeout(() => {
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+      }, 1000);
+
     });
   }
 }
