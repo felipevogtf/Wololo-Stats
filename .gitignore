@@ -21,6 +21,7 @@ npm-debug.log*
 coverage/
 www/
 node_modules/
+demo_apk/
 tmp/
 temp/
 platforms/
