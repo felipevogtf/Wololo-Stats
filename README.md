@@ -13,6 +13,10 @@ y permite comparar la mejor opción en diversas situaciones de juego.
 </br>
 Proyecto realizado en Ionic4.
 
+</br>
+</br>
+
+<a href="https://raw.githubusercontent.com/felipevogtf/Wololo-Stats/demo/demo_apk/WololoStats v1.0.apk"> Descarga una APK de demostración aqui.</a>
 </div>
 
 </br>
